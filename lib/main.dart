@@ -10,23 +10,24 @@ import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'Providers/auth_provider.dart';
+import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   // options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   String errorMessage = "Error occurred: $error";
-  //   var userDetails = GetStorage().read("login_data");
-  //   if (userDetails['data'] != null) {
-  //     errorMessage +=
-  //     ' Mobile number : ${userDetails['data']['mobile_number']}';
-  //   }
-  //   FirebaseCrashlytics.instance.recordError(errorMessage, stack, fatal: true);
-  //   return true;
-  // };
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    String errorMessage = "Error occurred: $error";
+    var userDetails = GetStorage().read("login_data");
+    if (userDetails['data'] != null) {
+      errorMessage +=
+      ' Mobile number : ${userDetails['data']['mobile_number']}';
+    }
+    FirebaseCrashlytics.instance.recordError(errorMessage, stack, fatal: true);
+    return true;
+  };
 
   await GetStorage.init();
   runApp(const MyApp());
