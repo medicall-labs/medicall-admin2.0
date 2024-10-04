@@ -28,7 +28,6 @@ class LocalDataProvider extends ChangeNotifier {
     // Save to GetStorage (optional if you want to persist the changes)
     userDetails['current_event_id'] = eventId;
     userDetails['current_event_title'] = eventTitle;
-    GetStorage().write("local_store", userDetails); // Persist data
   }
 }
 
