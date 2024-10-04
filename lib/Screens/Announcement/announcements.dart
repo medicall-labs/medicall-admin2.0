@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart'; // GetStorage import
 import 'package:admin_medicall/Providers/local_data.dart';
 import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
+import 'package:admin_medicall/Sevices/api_services.dart';
 import 'package:provider/provider.dart';
 
 class Announcements extends StatefulWidget {
@@ -20,11 +21,12 @@ class _AnnouncementsState extends State<Announcements> {
   File? selectedImage;
   final ImagePicker _picker = ImagePicker();
   final storage = GetStorage(); // Initialize GetStorage
-
+  var eventDetails;
   @override
   void initState() {
     super.initState();
-    _loadAnnouncements(); // Load announcements from storage when app starts
+    _loadAnnouncements();
+    eventDetails = GetStorage().read("event_details") ?? '';
   }
 
   // Load announcements from GetStorage
@@ -74,7 +76,7 @@ class _AnnouncementsState extends State<Announcements> {
                         labelText: 'Description',
                         hintText: 'Enter description',
                       ),
-                      maxLines: 3,
+                      maxLines: 1,
                     ),
                     const SizedBox(height: 10),
                     selectedImage == null
@@ -138,6 +140,26 @@ class _AnnouncementsState extends State<Announcements> {
     );
   }
 
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false, // Disable back button press
+          child: Dialog(
+            backgroundColor: Colors.transparent, // Make the background transparent
+            elevation: 0,
+            child: Center(
+              child: CircularProgressIndicator(), // Show a loading spinner
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+
   void _showPreviewAnnouncementDialog(String title, String description) async {
     showDialog(
       context: context,
@@ -172,23 +194,45 @@ class _AnnouncementsState extends State<Announcements> {
                 if (selectedVisibility != null) {
                   // If there is a selected image, upload it
                   String imageUrl = '';
+                  _showLoadingDialog(context);
                   if (selectedImage != null) {
                     // Upload image to Firebase
                     imageUrl = await _uploadImageToFirebase(selectedImage!);
                   }
 
-                  if (imageUrl.isNotEmpty || selectedImage == null) { // Check if image URL is valid
+                  if (imageUrl.isNotEmpty || selectedImage == null) {
+
+
                     // Construct the request body
                     final body = {
                       'title': title,
-                      'event_id': 'your_event_id_here', // Replace with your event ID
+                      'event_id': eventDetails['currentEventId'],
+                      'image' : imageUrl,
                       'description': description,
                       'visible_type': selectedVisibility,
                       'is_active': false,
                     };
 
-                    // Send the announcement
-                    await _sendAnnouncement(body);
+                    var response = await RemoteService().postDataToApi(
+                      'https://crm.medicall.in/api/admin/store-announcements',
+                      body
+                    );
+                    Navigator.pop(context);
+                    Navigator.pop(context); // Close preview dialog
+                    Navigator.pop(context); // Close create announcement dialog
+                    if (response.statusCode == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text('Announcement sent successfully!')),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text('Error sending announcement.')),
+                      );
+                    }
 
                     setState(() {
                       announcements.add({
@@ -199,8 +243,6 @@ class _AnnouncementsState extends State<Announcements> {
                       selectedImage = null; // Clear image after processing
                     });
                     _saveAnnouncements(); // Save announcements to GetStorage
-                    Navigator.pop(context); // Close preview dialog
-                    Navigator.pop(context); // Close create announcement dialog
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Error uploading image.')),
@@ -259,34 +301,25 @@ class _AnnouncementsState extends State<Announcements> {
     final String token = 'your_token_here'; // Replace with your token logic
     final url = Uri.parse('https://crm.medicall.in/api/admin/store-announcements');
 
-    // try {
-    //   // final response = await http.post(
-    //   //   url,
-    //   //   headers: {
-    //   //     'Authorization': 'Bearer $token',
-    //   //     'Content-Type': 'application/json',
-    //   //     'Accept': '*/*',
-    //   //   },
-    //   //   body: jsonEncode(body), // Encode the body to JSON
-    //   // );
-    //
-    //   // if (response.statusCode == 200) {
-    //   //   ScaffoldMessenger.of(context).showSnackBar(
-    //   //     const SnackBar(content: Text('Announcement sent successfully!')),
-    //   //   );
-    //   // } else {
-    //   //   ScaffoldMessenger.of(context).showSnackBar(
-    //   //     const SnackBar(content: Text('Error sending announcement.')),
-    //   //   );
-    //   }
-    // } catch (e) {
-    //   print('Error: $e');
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text('Error sending announcement.')),
-    //   );
-    // }
-  }
+    try {
+      // final response = await http.post(
+      //   url,
+      //   headers: {
+      //     'Authorization': 'Bearer $token',
+      //     'Content-Type': 'application/json',
+      //     'Accept': '*/*',
+      //   },
+      //   body: jsonEncode(body), // Encode the body to JSON
+      // );
 
+
+    } catch (e) {
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error sending announcement.')),
+      );
+    }
+  }
 
   // Function to upload image to Firebase Storage and return the URL
   Future<String> _uploadImageToFirebase(File image) async {
@@ -355,15 +388,13 @@ class _AnnouncementsState extends State<Announcements> {
 
   @override
   Widget build(BuildContext context) {
-    final localDataProvider = Provider.of<LocalDataProvider>(context);
-    final String eventTitle = localDataProvider.eventTitle;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.secondary,
         automaticallyImplyLeading: false,
         title: Text(
-          eventTitle,
+          eventDetails['currentAndPreviousEvents'][0]['title'].toString(),
           style: AppTextStyles.header1,
         ),
       ),

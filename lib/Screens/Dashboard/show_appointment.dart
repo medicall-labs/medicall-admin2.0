@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:admin_medicall/Providers/local_data.dart';
 import 'package:admin_medicall/Sevices/api_services.dart';
 import 'package:admin_medicall/Utils/Constants/api_collection.dart';
 import 'package:admin_medicall/Utils/Constants/app_color.dart';
-import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:admin_medicall/Utils/Widgets/back_button.dart';
 import 'package:provider/provider.dart';
@@ -357,6 +354,24 @@ class _ShowAppointmentState extends State<ShowAppointment> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Scheduled at :',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width *
+                                            0.5,
+                                        child: Text(
+                                          '${appointmentList[index]['scheduled_at']}',
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ]),
@@ -418,27 +433,6 @@ class _ShowAppointmentState extends State<ShowAppointment> {
                                           0.7,
                                       child: Text(
                                         '${appointmentList[index]['products']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Scheduled at :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${appointmentList[index]['scheduled_at']}',
                                         style: TextStyle(fontSize: 14),
                                       ),
                                     ),

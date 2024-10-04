@@ -141,7 +141,7 @@ class _InsightsState extends State<Insights> {
                             InfoCard(
                               title: 'Delegates',
                               icon: Icons.person,
-                              count: data['delegates_count'] ?? 0,
+                              count: data['delegateCount'] ?? 0,
                             ),
                           ],
                         ),

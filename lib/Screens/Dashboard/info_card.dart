@@ -6,6 +6,8 @@ import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 
+import '../Master/delegates.dart';
+
 class InfoCard extends StatelessWidget {
   final String title;
   final IconData icon;
@@ -25,7 +27,7 @@ class InfoCard extends StatelessWidget {
             ? ExhibitorMaster()
             : title == 'Visitors'
                 ? VisitorMaster()
-                : Container());
+                : Delegates());
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.3,
