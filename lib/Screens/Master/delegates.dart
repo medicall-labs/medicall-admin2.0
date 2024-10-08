@@ -376,7 +376,7 @@ class _DelegatesState extends State<Delegates> {
                 : !isLoading
                     ? const Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Center(child: Text('No exhibitors found')),
+                        child: Center(child: Text('No Delegates found')),
                       )
                     : Container(),
             if (isLoading)
@@ -387,7 +387,7 @@ class _DelegatesState extends State<Delegates> {
             if (!hasMore && delegatesList.isNotEmpty)
               const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Center(child: Text('No more exhibitors')),
+                child: Center(child: Text('No more Delegates')),
               ),
           ],
         ),

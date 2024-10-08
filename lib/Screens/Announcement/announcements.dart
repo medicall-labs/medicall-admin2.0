@@ -210,7 +210,7 @@ class _AnnouncementsState extends State<Announcements> {
                       'image' : imageUrl,
                       'description': description,
                       'visible_type': selectedVisibility,
-                      'is_active': false,
+                      'is_active': true,
                     };
 
                     var response = await RemoteService().postDataToApi(

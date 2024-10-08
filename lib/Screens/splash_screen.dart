@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Screens/bottom_nav_bar.dart';
 
+import '../Sevices/api_services.dart';
+import '../Utils/Constants/api_collection.dart';
 import 'Auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   var UserDetails = GetStorage().read("login_data") != ''
       ? GetStorage().read("login_data")
       : '';
+  final requestBaseUrl = AppUrl.baseUrl;
 
   @override
   void initState() {
@@ -34,6 +37,15 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       }
     });
+    Timer.periodic(Duration(minutes: 30), (timer) {
+      _loadEventDetails();
+    });
+  }
+
+  void _loadEventDetails() async {
+    var profileResponse =
+        await RemoteService().getDataFromApi('${requestBaseUrl}/event-details');
+    GetStorage().write("event_details", profileResponse);
   }
 
   @override
