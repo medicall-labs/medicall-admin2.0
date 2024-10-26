@@ -10,6 +10,8 @@ import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:admin_medicall/Utils/primary_tab_buttons.dart';
 import 'package:provider/provider.dart';
 
+import 'master_details.dart';
+
 class HomePage extends StatefulWidget {
   final int? tabScreen;
   HomePage({super.key, this.tabScreen});
@@ -86,6 +88,10 @@ class _HomePageState extends State<HomePage> {
               PrimaryTabButton(
                   buttonText: "Upcoming",
                   itemIndex: 2,
+                  notifier: _settingsButtonTrigger),
+              PrimaryTabButton(
+                  buttonText: "Masters",
+                  itemIndex: 3,
                   notifier: _settingsButtonTrigger)
             ],
           ),
@@ -100,9 +106,11 @@ class _HomePageState extends State<HomePage> {
                         ? NonLiveData(
                             nonLiveEvent: 'Completed',
                           )
-                        : NonLiveData(
-                            nonLiveEvent: 'Upcoming',
-                          );
+                        : _settingsButtonTrigger.value == 2
+                            ? NonLiveData(
+                                nonLiveEvent: 'Upcoming',
+                              )
+                            : MasterDetails();
               })
         ]),
       ),

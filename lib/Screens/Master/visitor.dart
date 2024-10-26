@@ -10,7 +10,8 @@ import 'package:admin_medicall/Utils/Widgets/back_button.dart';
 import 'package:provider/provider.dart';
 
 class VisitorMaster extends StatefulWidget {
-  const VisitorMaster({super.key});
+  final bool? isMasters;
+  const VisitorMaster({super.key, this.isMasters});
 
   @override
   State<VisitorMaster> createState() => _VisitorMasterState();
@@ -71,8 +72,9 @@ class _VisitorMasterState extends State<VisitorMaster> {
     setState(() {
       isLoading = true;
     });
-    String query =
-        '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
+    String query = widget.isMasters == true
+        ? '$baseUrl/admin/visitors?cursor=$nextCursor'
+        : '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
 
     if (searchController.text.isNotEmpty) {
       query += '&search=${searchController.text}';
@@ -327,9 +329,25 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          'Visitor',
+          widget.isMasters == true ? 'Visitor Masters' : 'Visitor',
           style: AppTextStyles.header1,
         ),
+        actions: [
+          widget.isMasters == true
+              ? IconButton(
+                  onPressed: isSearching ? _removeFilter : _showFilterModal,
+                  icon: isSearching
+                      ? Icon(
+                          Icons.filter_alt_off_rounded,
+                          color: Colors.white,
+                        )
+                      : Icon(
+                          Icons.filter_alt_rounded,
+                          color: Colors.white,
+                        ),
+                )
+              : SizedBox(),
+        ],
       ),
       backgroundColor: AppColor.bgColor,
       body: SingleChildScrollView(
@@ -337,24 +355,25 @@ class _VisitorMasterState extends State<VisitorMaster> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    eventTitle,
-                    style: AppTextStyles.header2,
-                  ),
-                  IconButton(
-                    onPressed: isSearching ? _removeFilter : _showFilterModal,
-                    icon: isSearching
-                        ? Icon(Icons.filter_alt_off_rounded)
-                        : Icon(Icons.filter_alt_rounded),
-                  ),
-                ],
+            if (widget.isMasters != true)
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      eventTitle,
+                      style: AppTextStyles.header2,
+                    ),
+                    IconButton(
+                      onPressed: isSearching ? _removeFilter : _showFilterModal,
+                      icon: isSearching
+                          ? Icon(Icons.filter_alt_off_rounded)
+                          : Icon(Icons.filter_alt_rounded),
+                    ),
+                  ],
+                ),
               ),
-            ),
             visitorList.isNotEmpty
                 ? ListView.builder(
                     shrinkWrap: true,
@@ -379,8 +398,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                       children: [
                                         Container(
                                           width: MediaQuery.of(context)
-                                              .size
-                                              .width *
+                                                  .size
+                                                  .width *
                                               0.2,
                                           child: Text(
                                             'Name ',
@@ -406,8 +425,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                       children: [
                                         Container(
                                           width: MediaQuery.of(context)
-                                              .size
-                                              .width *
+                                                  .size
+                                                  .width *
                                               0.2,
                                           child: Text(
                                             'Organization ',
@@ -433,8 +452,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                       children: [
                                         Container(
                                           width: MediaQuery.of(context)
-                                              .size
-                                              .width *
+                                                  .size
+                                                  .width *
                                               0.2,
                                           child: Text(
                                             'Designation ',
