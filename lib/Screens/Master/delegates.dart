@@ -248,14 +248,18 @@ class _DelegatesState extends State<Delegates> {
                             children: [
                               Row(
                                 children: [
-                                  Text(
-                                    'Name :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    child: Text(
+                                      'Name ',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
                                   ),
                                   Container(
                                     width:
-                                        MediaQuery.of(context).size.width * 0.7,
+                                        MediaQuery.of(context).size.width * 0.6,
                                     child: Text(
                                       '${delegatesList[index]['name']}',
                                       style: TextStyle(fontSize: 14),
@@ -266,10 +270,14 @@ class _DelegatesState extends State<Delegates> {
                               SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Text(
-                                    'Mobile number :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    child: Text(
+                                      'Mobile number',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
                                   ),
                                   Container(
                                     width:
@@ -284,10 +292,14 @@ class _DelegatesState extends State<Delegates> {
                               const SizedBox(height: 3),
                               Row(
                                 children: [
-                                  Text(
-                                    'Email :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    child: Text(
+                                      'Email',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
                                   ),
                                   Container(
                                     width:
@@ -302,10 +314,14 @@ class _DelegatesState extends State<Delegates> {
                               const SizedBox(height: 3),
                               Row(
                                 children: [
-                                  Text(
-                                    'Designation :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    child: Text(
+                                      'Designation',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
                                   ),
                                   Container(
                                     width:
@@ -320,10 +336,14 @@ class _DelegatesState extends State<Delegates> {
                               const SizedBox(height: 3),
                               Row(
                                 children: [
-                                  Text(
-                                    'Organization :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    child: Text(
+                                      'Organization',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
                                   ),
                                   Container(
                                     width:

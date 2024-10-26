@@ -71,7 +71,7 @@ class _Last7DaysCountState extends State<Last7DaysCount> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Last 7 Days Stats', style: AppTextStyles.header2),
+                      Text('Last 7 Days Stat', style: AppTextStyles.header2),
                       AppSpaces.verticalSpace20,
                       BarChartWidget(data: dataModels), // Use BarChartWidget
                       AppSpaces.verticalSpace40,

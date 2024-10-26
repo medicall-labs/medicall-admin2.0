@@ -43,11 +43,13 @@ class RemoteService {
   getDataFromApi(apiPath) async {
     try {
       final uri = Uri.parse(apiPath);
+      print('5400 uri --- > $uri');
       var response = await http.get(uri, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ${tokenDetails["token"]}',
       }).timeout(const Duration(minutes: 1));
+      print('5400 json --- > ${response.body}');
       return compute(parseUserData, response.body);
     } on TimeoutException {
       return {

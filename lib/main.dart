@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => LocalDataProvider()),
         ],
         child: GetMaterialApp(
-          title: 'Flutter Demo',
+          title: 'Medicall Admin',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
