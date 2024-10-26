@@ -250,7 +250,7 @@ class _DelegatesState extends State<Delegates> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.2,
+                                        0.3,
                                     child: Text(
                                       'Name ',
                                       style: TextStyle(
@@ -272,7 +272,7 @@ class _DelegatesState extends State<Delegates> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.2,
+                                        0.3,
                                     child: Text(
                                       'Mobile number',
                                       style: TextStyle(
@@ -294,7 +294,7 @@ class _DelegatesState extends State<Delegates> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.2,
+                                        0.3,
                                     child: Text(
                                       'Email',
                                       style: TextStyle(
@@ -316,7 +316,7 @@ class _DelegatesState extends State<Delegates> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.2,
+                                        0.3,
                                     child: Text(
                                       'Designation',
                                       style: TextStyle(
@@ -338,7 +338,7 @@ class _DelegatesState extends State<Delegates> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        0.2,
+                                        0.3,
                                     child: Text(
                                       'Organization',
                                       style: TextStyle(
