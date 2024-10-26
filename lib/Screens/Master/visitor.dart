@@ -329,7 +329,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          widget.isMasters == true ? 'Visitor Masters' : 'Visitor',
+          widget.isMasters == true ? 'Visitor Master' : 'Visitor',
           style: AppTextStyles.header1,
         ),
         actions: [
@@ -400,7 +400,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.2,
+                                              0.3,
                                           child: Text(
                                             'Name ',
                                             style: TextStyle(
@@ -412,7 +412,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.5,
+                                              0.4,
                                           child: Text(
                                             '${visitorList[index]['salutation']} ${visitorList[index]['name']}',
                                             style: TextStyle(fontSize: 14),
@@ -427,7 +427,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.2,
+                                              0.3,
                                           child: Text(
                                             'Organization ',
                                             style: TextStyle(
@@ -439,7 +439,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.5,
+                                              0.4,
                                           child: Text(
                                             '${visitorList[index]['organization']}',
                                             style: TextStyle(fontSize: 14),
@@ -454,7 +454,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.2,
+                                              0.3,
                                           child: Text(
                                             'Designation ',
                                             style: TextStyle(
@@ -466,7 +466,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.5,
+                                              0.4,
                                           child: Text(
                                             '${visitorList[index]['designation']}',
                                             style: TextStyle(fontSize: 14),
@@ -484,7 +484,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                          0.3,
                                       child: Text(
                                         'Mobile No ',
                                         style: TextStyle(
@@ -493,7 +493,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.6,
+                                          0.5,
                                       child: Text(
                                         '${visitorList[index]['mobile_no']}',
                                         style: TextStyle(fontSize: 14),
@@ -509,7 +509,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                          0.3,
                                       child: Text(
                                         'Email ',
                                         style: TextStyle(
@@ -518,7 +518,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.6,
+                                          0.5,
                                       child: Text(
                                         '${visitorList[index]['email']}',
                                         style: TextStyle(fontSize: 14),
@@ -533,7 +533,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      'Known sources  ',
+                                      'Known source  ',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
@@ -555,7 +555,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                          0.3,
                                       child: Text(
                                         'City, State ',
                                         style: TextStyle(
@@ -580,7 +580,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                          0.3,
                                       child: Text(
                                         'Address ',
                                         style: TextStyle(
@@ -605,7 +605,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.2,
+                                          0.3,
                                       child: Text(
                                         'Pincode ',
                                         style: TextStyle(
@@ -711,7 +711,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   onPressed: () async {
                                     await Clipboard.setData(ClipboardData(
                                         text:
-                                            "Name: ${visitorList[index]['name']}, Organization: ${visitorList[index]['organization']}, Designation: ${visitorList[index]['designation']}, Mobile No: ${visitorList[index]['mobile_no']}, Email: ${visitorList[index]['email']}, Nature of Business: ${visitorList[index]['nature_of_business']}, Reason for visit: ${visitorList[index]['reason_for_visit']}, Product looking for: ${visitorList[index]['product_looking_for']}"));
+                                            "Name: ${visitorList[index]['salutation']} ${visitorList[index]['name']}, Organization: ${visitorList[index]['organization']}, Designation: ${visitorList[index]['designation']}, Mobile No: ${visitorList[index]['mobile_no']}, Email: ${visitorList[index]['email']}, Known Source: ${visitorList[index]['known_sources']}, Address: ${visitorList[index]['address']},  Nature of Business: ${visitorList[index]['nature_of_business']}, Reason for visit: ${visitorList[index]['reason_for_visit']}, Product looking for: ${visitorList[index]['product_looking_for']}"));
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         backgroundColor: Colors.green,

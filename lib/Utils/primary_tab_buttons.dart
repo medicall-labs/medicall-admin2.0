@@ -45,6 +45,7 @@ class PrimaryTabButton extends StatelessWidget {
                   ),
                 ),
               ),
+              minimumSize: MaterialStateProperty.all<Size>(Size(50, 30)),
             ),
             child: Text(
               buttonText,
