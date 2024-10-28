@@ -130,12 +130,12 @@ class _InsightsState extends State<Insights> {
                           children: [
                             InfoCard(
                               title: 'Exhibitors',
-                              icon: Icons.person,
+                              icon: Icons.business,
                               count: data['exhibitors_count'] ?? 0,
                             ),
                             InfoCard(
                               title: 'Visitors',
-                              icon: Icons.person,
+                              icon: Icons.people,
                               count: data['visitors_count'] ?? 0,
                             ),
                             InfoCard(

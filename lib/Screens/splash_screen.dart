@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Screens/bottom_nav_bar.dart';
-
+import 'package:provider/provider.dart';
+import '../Providers/local_data.dart';
 import '../Sevices/api_services.dart';
 import '../Utils/Constants/api_collection.dart';
 import 'Auth/login.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key})
-      : super(
-          key: key,
-        );
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -20,32 +18,41 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
-
-  var UserDetails = GetStorage().read("login_data") != ''
-      ? GetStorage().read("login_data")
-      : '';
+  var userDetails = GetStorage().read("login_data") ?? '';
   final requestBaseUrl = AppUrl.baseUrl;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (mounted) {
-        setState(() {
-          var currentEvent = GetStorage().read("local_store");
-          Get.offAll(currentEvent == null ? LoginPage() : BottomNavBar());
-        });
-      }
-    });
-    Timer.periodic(Duration(minutes: 30), (timer) {
-      _loadEventDetails();
-    });
+    _loadEventDetails();
   }
 
   void _loadEventDetails() async {
-    var profileResponse =
-        await RemoteService().getDataFromApi('${requestBaseUrl}/event-details');
-    GetStorage().write("event_details", profileResponse);
+    var currentEvent = GetStorage().read("local_store");
+    if (currentEvent != null) {
+      var profileResponse = await RemoteService()
+          .getDataFromApi('${requestBaseUrl}/event-details');
+
+      // Save the event details to local storage
+      GetStorage().write("event_details", profileResponse);
+
+      Provider.of<LocalDataProvider>(context, listen: false).changeEventDetails(
+          profileResponse['currentEventId'],
+          profileResponse['currentAndPreviousEvents'][0]['title']);
+
+    }
+    _startNavigationTimer(currentEvent);
+  }
+
+  void _startNavigationTimer(var currentEvent) {
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (mounted) {
+        setState(() {
+          Get.offAll(currentEvent == null ? LoginPage() : BottomNavBar());
+        });
+        _timer?.cancel(); // Cancel the timer after navigating
+      }
+    });
   }
 
   @override

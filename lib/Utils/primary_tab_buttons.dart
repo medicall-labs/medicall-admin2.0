@@ -18,7 +18,7 @@ class PrimaryTabButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 3),
       child: ValueListenableBuilder(
         valueListenable: notifier,
         builder: (BuildContext context, _, __) {
@@ -45,15 +45,17 @@ class PrimaryTabButton extends StatelessWidget {
                   ),
                 ),
               ),
+              minimumSize: MaterialStateProperty.all<Size>(Size(50, 30)),
             ),
             child: Text(
               buttonText,
               style: GoogleFonts.lato(
-                fontSize: 14,
+                fontSize: 12,
                 fontWeight: notifier.value == itemIndex
                     ? FontWeight.bold
                     : FontWeight.normal,
-                color: notifier.value == itemIndex ? Colors.white : Colors.black,
+                color:
+                    notifier.value == itemIndex ? Colors.white : Colors.black,
               ),
             ),
           );
@@ -62,4 +64,3 @@ class PrimaryTabButton extends StatelessWidget {
     );
   }
 }
-

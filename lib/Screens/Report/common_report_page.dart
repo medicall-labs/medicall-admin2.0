@@ -125,7 +125,6 @@ class _CommonReportPageState extends State<CommonReportPage> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData &&
               snapshot.data is Map<String, dynamic>) {
-            print('5400 ---- ${snapshot.data}');
             var reportData = snapshot.data as Map<String, dynamic>;
             var chartTableData = _extractData(reportData);
 

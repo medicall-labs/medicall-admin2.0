@@ -10,7 +10,8 @@ import 'package:admin_medicall/Utils/Widgets/back_button.dart';
 import 'package:provider/provider.dart';
 
 class ExhibitorMaster extends StatefulWidget {
-  const ExhibitorMaster({super.key});
+  final bool? isMasters;
+  const ExhibitorMaster({super.key, this.isMasters});
 
   @override
   State<ExhibitorMaster> createState() => _ExhibitorMasterState();
@@ -71,8 +72,9 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
       isLoading = true;
     });
 
-    String query =
-        '$baseUrl/admin/exhibitors?event_id=$eventId&cursor=$nextCursor';
+    String query = widget.isMasters == true
+        ? '$baseUrl/admin/exhibitors?cursor=$nextCursor'
+        : '$baseUrl/admin/exhibitors?event_id=$eventId&cursor=$nextCursor';
 
     if (searchController.text.isNotEmpty) {
       query += '&search=${searchController.text}';
@@ -272,9 +274,25 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          'Exhibitor',
+          widget.isMasters == true ? 'Exhibitor Master' : 'Exhibitor',
           style: AppTextStyles.header1,
         ),
+        actions: [
+          widget.isMasters == true
+              ? IconButton(
+            onPressed: isSearching ? _removeFilter : _showFilterModal,
+            icon: isSearching
+                ? Icon(
+              Icons.filter_alt_off_rounded,
+              color: Colors.white,
+            )
+                : Icon(
+              Icons.filter_alt_rounded,
+              color: Colors.white,
+            ),
+          )
+              : SizedBox(),
+        ],
       ),
       backgroundColor: AppColor.bgColor,
       body: SingleChildScrollView(
@@ -282,6 +300,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (widget.isMasters != true)
             Padding(
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
@@ -322,15 +341,21 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text(
-                                        'Company :',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        child: Text(
+                                          'Company ',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
+                                        ),
                                       ),
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.5,
+                                                0.4,
                                         child: Text(
                                           '${exhibitorList[index]['company']}',
                                           style: TextStyle(fontSize: 14),
@@ -341,10 +366,16 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                   SizedBox(height: 5),
                                   Row(
                                     children: [
-                                      Text(
-                                        'Contact person :',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        child: Text(
+                                          'Contact person',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
+                                        ),
                                       ),
                                       Container(
                                         width:
@@ -360,10 +391,16 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                   const SizedBox(height: 3),
                                   Row(
                                     children: [
-                                      Text(
-                                        'Contact No :',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.3,
+                                        child: Text(
+                                          'Contact No',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
+                                        ),
                                       ),
                                       Container(
                                         width:
@@ -391,11 +428,17 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                       children: [
                                         Row(
                                           children: [
-                                            Text(
-                                              'Stall No :',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: AppColor.grey),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3,
+                                              child: Text(
+                                                'Stall No',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColor.grey),
+                                              ),
                                             ),
                                             Container(
                                               width: MediaQuery.of(context)
@@ -412,11 +455,17 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                         const SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Text(
-                                              'Stall space :',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: AppColor.grey),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3,
+                                              child: Text(
+                                                'Stall space',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColor.grey),
+                                              ),
                                             ),
                                             Container(
                                               width: MediaQuery.of(context)
@@ -433,11 +482,17 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                         const SizedBox(height: 5),
                                         Row(
                                           children: [
-                                            Text(
-                                              'Square space :',
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: AppColor.grey),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.3,
+                                              child: Text(
+                                                'Square space',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: AppColor.grey),
+                                              ),
                                             ),
                                             Container(
                                               width: MediaQuery.of(context)
@@ -650,10 +705,14 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                 alignment: Alignment.topLeft,
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Email :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Email ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
@@ -671,10 +730,14 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                 alignment: Alignment.topLeft,
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Company Phone No :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Company Phone No ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
@@ -692,10 +755,14 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                 alignment: Alignment.topLeft,
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Address :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Address',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
@@ -735,7 +802,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      'No of appointments:',
+                                      'No of appointments: ',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),

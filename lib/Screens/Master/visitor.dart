@@ -10,7 +10,8 @@ import 'package:admin_medicall/Utils/Widgets/back_button.dart';
 import 'package:provider/provider.dart';
 
 class VisitorMaster extends StatefulWidget {
-  const VisitorMaster({super.key});
+  final bool? isMasters;
+  const VisitorMaster({super.key, this.isMasters});
 
   @override
   State<VisitorMaster> createState() => _VisitorMasterState();
@@ -71,8 +72,9 @@ class _VisitorMasterState extends State<VisitorMaster> {
     setState(() {
       isLoading = true;
     });
-    String query =
-        '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
+    String query = widget.isMasters == true
+        ? '$baseUrl/admin/visitors?cursor=$nextCursor'
+        : '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
 
     if (searchController.text.isNotEmpty) {
       query += '&search=${searchController.text}';
@@ -327,9 +329,25 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          'Visitor',
+          widget.isMasters == true ? 'Visitor Master' : 'Visitor',
           style: AppTextStyles.header1,
         ),
+        actions: [
+          widget.isMasters == true
+              ? IconButton(
+                  onPressed: isSearching ? _removeFilter : _showFilterModal,
+                  icon: isSearching
+                      ? Icon(
+                          Icons.filter_alt_off_rounded,
+                          color: Colors.white,
+                        )
+                      : Icon(
+                          Icons.filter_alt_rounded,
+                          color: Colors.white,
+                        ),
+                )
+              : SizedBox(),
+        ],
       ),
       backgroundColor: AppColor.bgColor,
       body: SingleChildScrollView(
@@ -337,24 +355,25 @@ class _VisitorMasterState extends State<VisitorMaster> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    eventTitle,
-                    style: AppTextStyles.header2,
-                  ),
-                  IconButton(
-                    onPressed: isSearching ? _removeFilter : _showFilterModal,
-                    icon: isSearching
-                        ? Icon(Icons.filter_alt_off_rounded)
-                        : Icon(Icons.filter_alt_rounded),
-                  ),
-                ],
+            if (widget.isMasters != true)
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      eventTitle,
+                      style: AppTextStyles.header2,
+                    ),
+                    IconButton(
+                      onPressed: isSearching ? _removeFilter : _showFilterModal,
+                      icon: isSearching
+                          ? Icon(Icons.filter_alt_off_rounded)
+                          : Icon(Icons.filter_alt_rounded),
+                    ),
+                  ],
+                ),
               ),
-            ),
             visitorList.isNotEmpty
                 ? ListView.builder(
                     shrinkWrap: true,
@@ -377,19 +396,25 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text(
-                                          'Name :',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.3,
+                                          child: Text(
+                                            'Name ',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: AppColor.grey),
+                                          ),
                                         ),
                                         Container(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.6,
+                                              0.4,
                                           child: Text(
-                                            '${visitorList[index]['name']}',
+                                            '${visitorList[index]['salutation']} ${visitorList[index]['name']}',
                                             style: TextStyle(fontSize: 14),
                                           ),
                                         ),
@@ -398,11 +423,17 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     SizedBox(height: 5),
                                     Row(
                                       children: [
-                                        Text(
-                                          'Organization :',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.3,
+                                          child: Text(
+                                            'Organization ',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: AppColor.grey),
+                                          ),
                                         ),
                                         Container(
                                           width: MediaQuery.of(context)
@@ -419,11 +450,17 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     const SizedBox(height: 5),
                                     Row(
                                       children: [
-                                        Text(
-                                          'Designation :',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.3,
+                                          child: Text(
+                                            'Designation ',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: AppColor.grey),
+                                          ),
                                         ),
                                         Container(
                                           width: MediaQuery.of(context)
@@ -445,14 +482,18 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 alignment: Alignment.topLeft,
                                 child: Row(
                                   children: [
-                                    Text(
-                                      'Mobile No :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Mobile No ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.6,
+                                          0.5,
                                       child: Text(
                                         '${visitorList[index]['mobile_no']}',
                                         style: TextStyle(fontSize: 14),
@@ -466,16 +507,116 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 alignment: Alignment.topLeft,
                                 child: Row(
                                   children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Email ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Text(
+                                        '${visitorList[index]['email']}',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Row(
+                                  children: [
                                     Text(
-                                      'Email :',
+                                      'Known source  ',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
                                     Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.6,
+                                          0.5,
                                       child: Text(
-                                        '${visitorList[index]['email']}',
+                                        '${visitorList[index]['known_sources']}',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'City, State ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Text(
+                                        '${visitorList[index]['city']}, ${visitorList[index]['state']} ',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Address ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Text(
+                                        '${visitorList[index]['address']}',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.3,
+                                      child: Text(
+                                        'Pincode ',
+                                        style: TextStyle(
+                                            fontSize: 14, color: AppColor.grey),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.5,
+                                      child: Text(
+                                        '${visitorList[index]['pincode']}',
                                         style: TextStyle(fontSize: 14),
                                       ),
                                     ),
@@ -570,7 +711,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                   onPressed: () async {
                                     await Clipboard.setData(ClipboardData(
                                         text:
-                                            "Name: ${visitorList[index]['name']}, Organization: ${visitorList[index]['organization']}, Designation: ${visitorList[index]['designation']}, Mobile No: ${visitorList[index]['mobile_no']}, Email: ${visitorList[index]['email']}, Nature of Business: ${visitorList[index]['nature_of_business']}, Reason for visit: ${visitorList[index]['reason_for_visit']}, Product looking for: ${visitorList[index]['product_looking_for']}"));
+                                            "Name: ${visitorList[index]['salutation']} ${visitorList[index]['name']}, Organization: ${visitorList[index]['organization']}, Designation: ${visitorList[index]['designation']}, Mobile No: ${visitorList[index]['mobile_no']}, Email: ${visitorList[index]['email']}, Known Source: ${visitorList[index]['known_sources']}, Address: ${visitorList[index]['address']},  Nature of Business: ${visitorList[index]['nature_of_business']}, Reason for visit: ${visitorList[index]['reason_for_visit']}, Product looking for: ${visitorList[index]['product_looking_for']}"));
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         backgroundColor: Colors.green,
@@ -618,399 +759,3 @@ class _VisitorMasterState extends State<VisitorMaster> {
     );
   }
 }
-
-// old code without search
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:get_storage/get_storage.dart';
-// import 'package:admin_medicall/Providers/local_data.dart';
-// import 'package:admin_medicall/Sevices/api_services.dart';
-// import 'package:admin_medicall/Utils/Constants/api_collection.dart';
-// import 'package:admin_medicall/Utils/Constants/app_color.dart';
-// import 'package:admin_medicall/Utils/Constants/styles.dart';
-// import 'package:admin_medicall/Utils/Widgets/back_button.dart';
-// import 'package:provider/provider.dart';
-
-// class VisitorMaster extends StatefulWidget {
-//   const VisitorMaster({super.key});
-//
-//   @override
-//   State<VisitorMaster> createState() => _VisitorMasterState();
-// }
-//
-// class _VisitorMasterState extends State<VisitorMaster> {
-//   final ScrollController _scrollController = ScrollController();
-//
-//   List<dynamic> visitorList = [];
-//   bool isLoading = false;
-//   bool hasMore = true;
-//   var baseUrl = AppUrl.baseUrl;
-//   late int eventId;
-//   bool search = false;
-//   String searchApi = '';
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     // Fetch the eventId from LocalDataProvider when the widget is initialized
-//     WidgetsBinding.instance.addPostFrameCallback((_) {
-//       final localDataProvider =
-//           Provider.of<LocalDataProvider>(context, listen: false);
-//       setState(() {
-//         eventId = localDataProvider.eventId;
-//       });
-//       _loadVisitors(null);
-//     });
-//
-//     _scrollController.addListener(_onScroll);
-//   }
-//
-//   void _onScroll() {
-//     if (_scrollController.position.pixels ==
-//             _scrollController.position.maxScrollExtent &&
-//         !isLoading &&
-//         hasMore) {
-//       var nextCursor = GetStorage().read("VisitorMaster");
-//       if (nextCursor != null &&
-//           nextCursor['paginate_data']['next_cursor'] != null) {
-//         _loadVisitors(nextCursor['paginate_data']['next_cursor']);
-//       }
-//     }
-//   }
-//
-//   Future<void> _loadVisitors(nextCursor) async {
-//     if (isLoading || !hasMore) return;
-//     setState(() {
-//       isLoading = true;
-//     });
-//
-//     var result = await RemoteService().getDataFromApi(
-//       '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor',
-//     );
-//     GetStorage().write("VisitorMaster", result);
-//
-//     if (result is Map<String, dynamic> && result['visitors'] != null) {
-//       setState(() {
-//         visitorList.addAll(result['visitors']);
-//         hasMore = result['visitors'].length > 0;
-//         isLoading = false;
-//       });
-//     } else if (result == 'Timeout') {
-//       setState(() {
-//         isLoading = false;
-//       });
-//     } else {
-//       setState(() {
-//         isLoading = false;
-//         hasMore = false;
-//       });
-//     }
-//   }
-//
-//   @override
-//   void dispose() {
-//     _scrollController.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     String eventTitle = Provider.of<LocalDataProvider>(context).eventTitle;
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: AppColor.secondary,
-//         leading: const Padding(
-//           padding: EdgeInsets.all(8.0),
-//           child: NavigationBack(),
-//         ),
-//         title: Text(
-//           'Visitor',
-//           style: AppTextStyles.header1,
-//         ),
-//       ),
-//       backgroundColor: AppColor.bgColor,
-//       body: SingleChildScrollView(
-//         controller: _scrollController,
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Padding(
-//               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-//               child: Text(
-//                 eventTitle,
-//                 style: AppTextStyles.header2,
-//               ),
-//             ),
-//             visitorList.isNotEmpty
-//                 ? ListView.builder(
-//                     shrinkWrap: true,
-//                     physics: const NeverScrollableScrollPhysics(),
-//                     itemCount: visitorList.length,
-//                     itemBuilder: (context, index) {
-//                       return Card(
-//                         elevation: 5,
-//                         margin:
-//                             EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-//                         child: Theme(
-//                             data: Theme.of(context)
-//                                 .copyWith(dividerColor: AppColor.bgColor),
-//                             child: ExpansionTile(
-//                               iconColor: AppColor.grey,
-//                               textColor: AppColor.primary,
-//                               title: Row(children: [
-//                                 Column(
-//                                   crossAxisAlignment: CrossAxisAlignment.start,
-//                                   children: [
-//                                     Row(
-//                                       children: [
-//                                         Text(
-//                                           'Name :',
-//                                           style: TextStyle(
-//                                               fontSize: 14,
-//                                               color: AppColor.grey),
-//                                         ),
-//                                         Container(
-//                                           width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width *
-//                                               0.6,
-//                                           child: Text(
-//                                             '${visitorList[index]['name']}',
-//                                             style: TextStyle(fontSize: 14),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     SizedBox(height: 5),
-//                                     Row(
-//                                       children: [
-//                                         Text(
-//                                           'Organization :',
-//                                           style: TextStyle(
-//                                               fontSize: 14,
-//                                               color: AppColor.grey),
-//                                         ),
-//                                         Container(
-//                                           width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width *
-//                                               0.4,
-//                                           child: Text(
-//                                             '${visitorList[index]['organization']}',
-//                                             style: TextStyle(fontSize: 14),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     const SizedBox(height: 5),
-//                                     Row(
-//                                       children: [
-//                                         Text(
-//                                           'Designation :',
-//                                           style: TextStyle(
-//                                               fontSize: 14,
-//                                               color: AppColor.grey),
-//                                         ),
-//                                         Container(
-//                                           width: MediaQuery.of(context)
-//                                                   .size
-//                                                   .width *
-//                                               0.4,
-//                                           child: Text(
-//                                             '${visitorList[index]['designation']}',
-//                                             style: TextStyle(fontSize: 14),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ]),
-//                               childrenPadding: const EdgeInsets.only(left: 14),
-//                               children: [
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'Mobile No :',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.6,
-//                                         child: Text(
-//                                           '${visitorList[index]['mobile_no']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 const SizedBox(height: 5),
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'Email :',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.6,
-//                                         child: Text(
-//                                           '${visitorList[index]['email']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 const SizedBox(height: 5),
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'Nature of Business :',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.5,
-//                                         child: Text(
-//                                           '${visitorList[index]['nature_of_business']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 const SizedBox(height: 5),
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'Reason for visit :',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.5,
-//                                         child: Text(
-//                                           '${visitorList[index]['reason_for_visit']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 const SizedBox(height: 5),
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'Product looking for :',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.5,
-//                                         child: Text(
-//                                           '${visitorList[index]['product_looking_for']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 const SizedBox(height: 5),
-//                                 Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Row(
-//                                     children: [
-//                                       Text(
-//                                         'No of appointments:',
-//                                         style: TextStyle(
-//                                             fontSize: 14, color: AppColor.grey),
-//                                       ),
-//                                       Container(
-//                                         width:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.3,
-//                                         child: Text(
-//                                           '${visitorList[index]['no_of_appointments']}',
-//                                           style: TextStyle(fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ),
-//                                 ElevatedButton(
-//                                     onPressed: () async {
-//                                       await Clipboard.setData(ClipboardData(
-//                                           text:
-//                                               "Name: ${visitorList[index]['name']}, Organization: ${visitorList[index]['organization']}, Designation: ${visitorList[index]['designation']}, Mobile No: ${visitorList[index]['mobile_no']}, Email: ${visitorList[index]['email']}, Nature of Business: ${visitorList[index]['nature_of_business']}, Reason for visit: ${visitorList[index]['reason_for_visit']}, Product looking for: ${visitorList[index]['product_looking_for']}"));
-//                                       ScaffoldMessenger.of(context)
-//                                           .showSnackBar(
-//                                         const SnackBar(
-//                                           backgroundColor: Colors.green,
-//                                           content:
-//                                               Text('Visitor Details Copied'),
-//                                         ),
-//                                       );
-//                                     },
-//                                     style: ButtonStyle(
-//                                         backgroundColor:
-//                                             WidgetStateProperty.all<Color>(
-//                                                 AppColor.secondary),
-//                                         minimumSize:
-//                                             WidgetStateProperty.all<Size>(
-//                                                 Size(120, 25))),
-//                                     child: const Text(
-//                                       'Add to Clipboard',
-//                                       style: TextStyle(
-//                                           fontSize: 12, color: Colors.white),
-//                                     )),
-//                               ],
-//                             )),
-//                       );
-//                     },
-//                   )
-//                 : !isLoading
-//                     ? const Padding(
-//                         padding: EdgeInsets.all(16.0),
-//                         child: Center(child: Text('No visitors found')),
-//                       )
-//                     : Container(),
-//             if (isLoading)
-//               const Padding(
-//                 padding: EdgeInsets.all(16.0),
-//                 child: Center(child: CircularProgressIndicator()),
-//               ),
-//             if (!hasMore && visitorList.isNotEmpty)
-//               const Padding(
-//                 padding: EdgeInsets.all(16.0),
-//                 child: Center(child: Text('No more visitors')),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

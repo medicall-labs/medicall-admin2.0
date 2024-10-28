@@ -38,7 +38,7 @@ class DefaultPage extends StatelessWidget {
             if(eventDetails['currentEventId'] <= eventId)
             _buildListTile(
               context,
-              title: 'Last 7 days count',
+              title: 'Last 7 Days Count',
               eventTitle: eventTitle,
               eventId: eventId,
               destinationScreen:
@@ -46,39 +46,39 @@ class DefaultPage extends StatelessWidget {
             ),
             _buildListTile(
               context,
-              title: 'Top Cities Counts',
+              title: 'Top Cities Count',
               eventTitle: eventTitle,
               eventId: eventId,
               destinationScreen: CommonReportPage(
                 eventTitle: eventTitle,
                 eventId: eventId,
-                pageTitle: 'Top Cities Counts',
+                pageTitle: 'Top Cities Count',
                 tableHeading: 'City',
                 endPoint: 'top-locations?type=city',
               ),
             ),
             _buildListTile(
               context,
-              title: 'Top States Counts',
+              title: 'Top States Count',
               eventTitle: eventTitle,
               eventId: eventId,
               destinationScreen: CommonReportPage(
                 eventTitle: eventTitle,
                 eventId: eventId,
-                pageTitle: 'Top States Counts',
+                pageTitle: 'Top States Count',
                 tableHeading: 'State',
                 endPoint: 'top-locations?type=state',
               ),
             ),
             _buildListTile(
               context,
-              title: 'Top Countries Counts',
+              title: 'Top Countries Count',
               eventTitle: eventTitle,
               eventId: eventId,
               destinationScreen: CommonReportPage(
                 eventTitle: eventTitle,
                 eventId: eventId,
-                pageTitle: 'Top Countries Counts',
+                pageTitle: 'Top Countries Count',
                 tableHeading: 'Country',
                 endPoint: 'top-locations?type=country',
               ),
@@ -91,7 +91,7 @@ class DefaultPage extends StatelessWidget {
               destinationScreen: CommonReportPage(
                 eventTitle: eventTitle,
                 eventId: eventId,
-                pageTitle: 'Registration Type Wise Counts',
+                pageTitle: 'Registration Type Wise Count',
                 tableHeading: 'Registration Type',
                 endPoint: 'registration-typewise-count',
               ),
@@ -104,7 +104,7 @@ class DefaultPage extends StatelessWidget {
               destinationScreen: CommonReportPage(
                 eventTitle: eventTitle,
                 eventId: eventId,
-                pageTitle: 'Business Type Wise Counts',
+                pageTitle: 'Business Type Wise Count',
                 tableHeading: 'Profile',
                 endPoint: 'business-typewise-count',
               ),
