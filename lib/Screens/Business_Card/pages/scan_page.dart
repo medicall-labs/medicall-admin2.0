@@ -5,9 +5,13 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../Utils/Constants/app_color.dart';
+import '../../../Utils/Constants/styles.dart';
+import '../../../Utils/Widgets/back_button.dart';
 import '../items/drag_target_item.dart';
 import '../items/line_item.dart';
 import '../models/contact_model.dart';
+import 'business_card.dart';
 import 'form_page.dart';
 
 class ScanPage extends StatefulWidget {
@@ -34,20 +38,16 @@ class _ScanPageState extends State<ScanPage> {
 
   void createContact() {
     final contact = ContactModel(
-      name: name,
-      mobile: mobile,
-      email: email,
-      address: address,
-      company: company,
-      designation: designation,
-      website: website,
-      image: image
-    );
-    // Get.to( FormPage(
-    //   contactModel: state.extra! as ContactModel,
-    // ));
-    Get.to( FormPage(
-     contactModel: contact,
+        name: name,
+        mobile: mobile,
+        email: email,
+        address: address,
+        company: company,
+        designation: designation,
+        website: website,
+        image: image);
+    Get.to(FormPage(
+      contactModel: contact,
     ));
   }
 
@@ -55,11 +55,22 @@ class _ScanPageState extends State<ScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan Page'),
+        backgroundColor: AppColor.secondary,
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: NavigationBack(),
+        ),
+        title: Text(
+          'Scan the Card',
+          style: AppTextStyles.header1,
+        ),
         actions: [
           IconButton(
             onPressed: image.isEmpty ? null : createContact,
-            icon: const Icon(Icons.arrow_forward),
+            icon: Icon(
+              image.isEmpty ? null : Icons.arrow_forward,
+              color: Colors.white,
+            ),
           )
         ],
       ),
@@ -73,14 +84,28 @@ class _ScanPageState extends State<ScanPage> {
                   getImage(ImageSource.camera);
                 },
                 icon: const Icon(Icons.camera),
-                label: const Text('Capture'),
+                label: Text(
+                  'Capture',
+                  style: AppTextStyles.text4.copyWith(
+                    color: AppColor.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
               ),
               TextButton.icon(
                 onPressed: () {
                   getImage(ImageSource.gallery);
                 },
                 icon: const Icon(Icons.photo_album),
-                label: const Text('Gallery'),
+                label: Text(
+                  'Gallery',
+                  style: AppTextStyles.text4.copyWith(
+                    color: AppColor.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
               )
             ],
           ),
@@ -125,12 +150,17 @@ class _ScanPageState extends State<ScanPage> {
           if (isScanOver)
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Long press and Drag each item from the below list and drop above in the appropriate box. You can drop multiple items in a single box.'),
+              child: Text(
+                  'Long press and Drag each item from the below list and drop above in the appropriate box. You can drop multiple items in a single box.'),
             ),
           Wrap(
             children: lines.map((line) => LineItem(line: line)).toList(),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(BusinessCard()),
+        child: Icon(Icons.list_alt_rounded),
       ),
     );
   }

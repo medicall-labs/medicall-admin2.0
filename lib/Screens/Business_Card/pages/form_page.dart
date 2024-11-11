@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import '../../../Utils/Constants/app_color.dart';
+import '../../../Utils/Constants/styles.dart';
+import '../../../Utils/Widgets/back_button.dart';
 import '../models/contact_model.dart';
 import '../pages/business_card.dart';
 import '../providers/contact_provider.dart';
@@ -44,11 +47,20 @@ class _FormPageState extends State<FormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Form Page'),
+        backgroundColor: AppColor.secondary,
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: NavigationBack(),
+        ),
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Form Page',
+          style: AppTextStyles.header1,
+        ),
         actions: [
           IconButton(
             onPressed: saveContact,
-            icon: const Icon(Icons.save),
+            icon: const Icon(Icons.save,color: Colors.white,),
           )
         ],
       ),

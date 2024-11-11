@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import '../../../Utils/Constants/app_color.dart';
+import '../../../Utils/Constants/styles.dart';
+import '../../../Utils/Widgets/back_button.dart';
 import '../pages/scan_page.dart';
 import '../providers/contact_provider.dart';
 
@@ -20,38 +23,17 @@ class _BusinessCardState extends State<BusinessCard> {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contact List'),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        onPressed: () {
-          Get.to(ScanPage());
-        },
-        child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        padding: EdgeInsets.zero,
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
-        clipBehavior: Clip.antiAlias,
-        child: BottomNavigationBar(
-          backgroundColor: Colors.blue[100],
-          onTap: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-          },
-          currentIndex: selectedIndex,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'All'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: 'Favorite')
-          ],
+        backgroundColor: AppColor.secondary,
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: NavigationBack(),
+        ),
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Scanned Card List',
+          style: AppTextStyles.header1,
         ),
       ),
       body: Consumer<ContactProvider>(
@@ -59,17 +41,164 @@ class _BusinessCardState extends State<BusinessCard> {
           itemCount: provider.contactList.length,
           itemBuilder: (context, index) {
             final contact = provider.contactList[index];
-            return ListTile(
-              title: Text(contact.name),
-              subtitle: Text(contact.mobile),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(contact.favorite
-                      ? Icons.favorite
-                      : Icons.favorite_border)),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Name ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.name}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Designation ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.designation}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Mobile no ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.mobile}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Email ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.email}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Company ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.company}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Address ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.address}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              child: Text(
+                                'Website ',
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColor.grey),
+                              ),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              child: Text(
+                                '${contact.website}',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ]),
+                ),
+              ),
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: const CircleBorder(),
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
