@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Providers/auth_provider.dart';
 import 'package:admin_medicall/Providers/local_data.dart';
@@ -10,6 +11,7 @@ import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:admin_medicall/Utils/primary_tab_buttons.dart';
 import 'package:provider/provider.dart';
 
+import '../Business_Card/pages/business_card.dart';
 import 'master_details.dart';
 
 class HomePage extends StatefulWidget {
@@ -113,6 +115,10 @@ class _HomePageState extends State<HomePage> {
                             : MasterDetails();
               })
         ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.to(BusinessCard()),
+        child: Icon(Icons.document_scanner_outlined),
       ),
     );
   }
