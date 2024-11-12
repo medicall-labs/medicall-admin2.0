@@ -57,12 +57,6 @@ class _FormPageState extends State<FormPage> {
           'Form Page',
           style: AppTextStyles.header1,
         ),
-        actions: [
-          IconButton(
-            onPressed: saveContact,
-            icon: const Icon(Icons.save,color: Colors.white,),
-          )
-        ],
       ),
       body: Form(
         key: _formKey,
@@ -129,6 +123,27 @@ class _FormPageState extends State<FormPage> {
               },
             ),
           ],
+        ),
+      ),
+      floatingActionButton: SizedBox(
+        width: 150,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor:
+            WidgetStateProperty.all<Color>(AppColor.secondary),
+          ),
+          onPressed: saveContact,
+          child: Row(
+            children: [
+              Text('Show history',style: AppTextStyles.text4.copyWith(
+                color: AppColor.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),),
+              SizedBox(width: 10,),
+              Icon(Icons.save,color: Colors.white,),
+            ],
+          ),
         ),
       ),
     );

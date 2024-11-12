@@ -64,15 +64,7 @@ class _ScanPageState extends State<ScanPage> {
           'Scan the Card',
           style: AppTextStyles.header1,
         ),
-        actions: [
-          IconButton(
-            onPressed: image.isEmpty ? null : createContact,
-            icon: Icon(
-              image.isEmpty ? null : Icons.arrow_forward,
-              color: Colors.white,
-            ),
-          )
-        ],
+
       ),
       body: ListView(
         children: [
@@ -158,9 +150,37 @@ class _ScanPageState extends State<ScanPage> {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(BusinessCard()),
-        child: Icon(Icons.list_alt_rounded),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 25.0),
+            child: ElevatedButton(
+              onPressed: () => Get.to(BusinessCard()),
+              child: Row(
+                children: [
+                  Text('Show history',style: AppTextStyles.text4.copyWith(
+                    color: AppColor.primary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),),
+                  SizedBox(width: 10,),
+                  Icon(Icons.list_alt_rounded),
+                ],
+              ),
+            ),
+          ),
+          if(image.isNotEmpty)
+          ElevatedButton(
+            onPressed: image.isEmpty ? null : createContact,
+            child: Text('View Card Details',style: AppTextStyles.text4.copyWith(
+              color: AppColor.primary,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),),
+          ),
+
+        ],
       ),
     );
   }
