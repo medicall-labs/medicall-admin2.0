@@ -156,25 +156,31 @@ class _ScanPageState extends State<ScanPage> {
           Padding(
             padding: const EdgeInsets.only(left: 25.0),
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all<Color>(AppColor.secondary),
+              ),
               onPressed: () => Get.to(BusinessCard()),
               child: Row(
                 children: [
                   Text('Show history',style: AppTextStyles.text4.copyWith(
-                    color: AppColor.primary,
+                    color: AppColor.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),),
                   SizedBox(width: 10,),
-                  Icon(Icons.list_alt_rounded),
+                  Icon(Icons.list_alt_rounded,color: Colors.white,),
                 ],
               ),
             ),
           ),
           if(image.isNotEmpty)
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all<Color>(AppColor.secondary),
+            ),
             onPressed: image.isEmpty ? null : createContact,
             child: Text('View Card Details',style: AppTextStyles.text4.copyWith(
-              color: AppColor.primary,
+              color: AppColor.white,
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),),
