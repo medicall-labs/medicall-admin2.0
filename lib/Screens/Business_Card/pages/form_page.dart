@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:admin_medicall/Screens/Dashboard/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -189,13 +190,13 @@ class _FormPageState extends State<FormPage> {
           .then((value) async {
         if (value > 0) {
           _submitForm();
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Saved to Google Sheet!')));
-          Get.to(BusinessCard());
+          // ScaffoldMessenger.of(context)
+          //     .showSnackBar(SnackBar(backgroundColor: Colors.green,content: Text('Saved to Google Sheet!')));
+          Get.to(HomePage());
         }
       }).catchError((onError) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to save!')));
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Failed to save!')));
       });
     }
   }
@@ -224,26 +225,13 @@ class _FormPageState extends State<FormPage> {
           },
           body: jsonEncode(data),
         );
-        if (response.statusCode == 200) {
-          var jsonResponse = jsonDecode(response.body);
-          if (jsonResponse['status'] == 'success') {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Saved to Google Sheet!')));
-            Get.to(BusinessCard());
-          } else {
-            print("Failed to add data: ${jsonResponse['message']}");
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('Failed to save!')));
-          }
-        } else {
-          print("Error: ${response.statusCode}");
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Failed to save!')));
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(backgroundColor: Colors.green,content: Text('Saved to Google Sheet!')));
+
       } catch (error) {
         print("Error: $error");
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to save!')));
+            .showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Failed to save!')));
       }
     }
   }

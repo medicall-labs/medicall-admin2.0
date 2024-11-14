@@ -64,7 +64,6 @@ class _ScanPageState extends State<ScanPage> {
           'Scan the Card',
           style: AppTextStyles.header1,
         ),
-
       ),
       body: ListView(
         children: [
@@ -139,14 +138,13 @@ class _ScanPageState extends State<ScanPage> {
                 ),
               ),
             ),
-          if (isScanOver)
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                  'Long press and Drag each item from the below list and drop above in the appropriate box. You can drop multiple items in a single box.'),
-            ),
           Wrap(
-            children: lines.map((line) => LineItem(line: line)).toList(),
+            children: lines
+                .map((line) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: LineItem(line: line),
+                    ))
+                .toList(),
           )
         ],
       ),
@@ -157,35 +155,47 @@ class _ScanPageState extends State<ScanPage> {
             padding: const EdgeInsets.only(left: 25.0),
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(AppColor.secondary),
+                backgroundColor:
+                    WidgetStateProperty.all<Color>(AppColor.secondary),
               ),
               onPressed: () => Get.to(BusinessCard()),
               child: Row(
                 children: [
-                  Text('Show history',style: AppTextStyles.text4.copyWith(
-                    color: AppColor.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),),
-                  SizedBox(width: 10,),
-                  Icon(Icons.list_alt_rounded,color: Colors.white,),
+                  Text(
+                    'Show history',
+                    style: AppTextStyles.text4.copyWith(
+                      color: AppColor.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Icon(
+                    Icons.list_alt_rounded,
+                    color: Colors.white,
+                  ),
                 ],
               ),
             ),
           ),
-          if(image.isNotEmpty)
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(AppColor.secondary),
+          if (image.isNotEmpty)
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    WidgetStateProperty.all<Color>(AppColor.secondary),
+              ),
+              onPressed: image.isEmpty ? null : createContact,
+              child: Text(
+                'View Card Details',
+                style: AppTextStyles.text4.copyWith(
+                  color: AppColor.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
             ),
-            onPressed: image.isEmpty ? null : createContact,
-            child: Text('View Card Details',style: AppTextStyles.text4.copyWith(
-              color: AppColor.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),),
-          ),
-
         ],
       ),
     );
@@ -208,9 +218,16 @@ class _ScanPageState extends State<ScanPage> {
       EasyLoading.dismiss();
 
       final tempList = <String>[];
+
+      final labelRegex = RegExp(r'^[A-Za-z\s]+[-]?[A-Za-z\s]+:\s*');
+
       for (var block in recognizedText.blocks) {
         for (var line in block.lines) {
-          tempList.add(line.text);
+          final cleanedLine = line.text.replaceAll(labelRegex, '').trim();
+
+          if (cleanedLine.isNotEmpty) {
+            tempList.add(cleanedLine);
+          }
         }
       }
 
