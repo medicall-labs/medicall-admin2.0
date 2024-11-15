@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {
           Get.offAll(currentEvent == null ? LoginPage() : BottomNavBar());
         });
-        _timer?.cancel(); // Cancel the timer after navigating
+        _timer?.cancel();
       }
     });
   }
