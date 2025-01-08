@@ -69,33 +69,36 @@ class _HomePageState extends State<HomePage> {
         children: [
           SingleChildScrollView(
             child: Column(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  PrimaryTabButton(
-                    buttonText: "Live",
-                    itemIndex: 0,
-                    notifier: _settingsButtonTrigger,
-                    onTap: () {
-                      // Update the local event ID to 54 when "Live" tab is pressed
-                      Provider.of<LocalDataProvider>(context, listen: false)
-                          .changeEventDetails(eventDetails['currentEventId'],
-                          eventDetails['currentAndPreviousEvents'][0]['title']);
-                    },
-                  ),
-                  PrimaryTabButton(
-                      buttonText: "Completed",
-                      itemIndex: 1,
-                      notifier: _settingsButtonTrigger),
-                  PrimaryTabButton(
-                      buttonText: "Upcoming",
-                      itemIndex: 2,
-                      notifier: _settingsButtonTrigger),
-                  PrimaryTabButton(
-                      buttonText: "Masters",
-                      itemIndex: 3,
-                      notifier: _settingsButtonTrigger)
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    PrimaryTabButton(
+                      buttonText: "Live",
+                      itemIndex: 0,
+                      notifier: _settingsButtonTrigger,
+                      onTap: () {
+                        // Update the local event ID to 54 when "Live" tab is pressed
+                        Provider.of<LocalDataProvider>(context, listen: false)
+                            .changeEventDetails(eventDetails['currentEventId'],
+                            eventDetails['currentAndPreviousEvents'][0]['title']);
+                      },
+                    ),
+                    PrimaryTabButton(
+                        buttonText: "Completed",
+                        itemIndex: 1,
+                        notifier: _settingsButtonTrigger),
+                    PrimaryTabButton(
+                        buttonText: "Upcoming",
+                        itemIndex: 2,
+                        notifier: _settingsButtonTrigger),
+                    PrimaryTabButton(
+                        buttonText: "Masters",
+                        itemIndex: 3,
+                        notifier: _settingsButtonTrigger)
+                  ],
+                ),
               ),
               AppSpaces.verticalSpace20,
               ValueListenableBuilder(

@@ -27,22 +27,18 @@ class _InsightsState extends State<Insights> {
 
   int calculateTotalRegisteredCount(Map<String, dynamic> dayData) {
     int total = 0;
-    if (dayData != null) {
-      dayData.forEach((key, value) {
-        total += (value['total_register_count'] as int?) ?? 0;
-      });
-    }
-    return total;
+    dayData.forEach((key, value) {
+      total += (value['total_register_count'] as int?) ?? 0;
+    });
+      return total;
   }
 
   int calculateTotalVisitedCount(Map<String, dynamic> dayData) {
     int total = 0;
-    if (dayData != null) {
-      dayData.forEach((key, value) {
-        total += (value['visited_count'] as int?) ?? 0;
-      });
-    }
-    return total;
+    dayData.forEach((key, value) {
+      total += (value['visited_count'] as int?) ?? 0;
+    });
+      return total;
   }
 
   @override

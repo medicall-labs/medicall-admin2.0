@@ -48,7 +48,7 @@ class DayCard extends StatelessWidget {
                   day,
                   style: AppTextStyles.text3.copyWith(
                     fontWeight: FontWeight.normal,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                 ),
               ],
@@ -59,7 +59,7 @@ class DayCard extends StatelessWidget {
               style: AppTextStyles.text4.copyWith(
                 color: AppColor.primary,
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
+                fontSize: 12,
               ),
             ),
             AppSpaces.verticalSpace5,
