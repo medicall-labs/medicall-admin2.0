@@ -274,7 +274,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          widget.isMasters == true ? 'Exhibitor Master' : 'Exhibitor',
+          widget.isMasters == true ? 'Exhibitor Master' : 'Exhibitors List',
           style: AppTextStyles.header1,
         ),
         actions: [
@@ -407,7 +407,6 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                               ],
                             ),
                             tilePadding: EdgeInsets.only(left: 14,right: 5),
-                            // trailing: SizedBox.shrink(),
                             collapsedIconColor: AppColor.secondary,
                             childrenPadding:
                                 const EdgeInsets.only(left: 14),
