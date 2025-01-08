@@ -333,6 +333,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                           data: Theme.of(context)
                               .copyWith(dividerColor: AppColor.bgColor),
                           child: ExpansionTile(
+                            textColor: AppColor.secondary,
                             title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
