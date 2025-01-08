@@ -280,17 +280,17 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
         actions: [
           widget.isMasters == true
               ? IconButton(
-            onPressed: isSearching ? _removeFilter : _showFilterModal,
-            icon: isSearching
-                ? Icon(
-              Icons.filter_alt_off_rounded,
-              color: Colors.white,
-            )
-                : Icon(
-              Icons.filter_alt_rounded,
-              color: Colors.white,
-            ),
-          )
+                  onPressed: isSearching ? _removeFilter : _showFilterModal,
+                  icon: isSearching
+                      ? Icon(
+                          Icons.filter_alt_off_rounded,
+                          color: Colors.white,
+                        )
+                      : Icon(
+                          Icons.filter_alt_rounded,
+                          color: Colors.white,
+                        ),
+                )
               : SizedBox(),
         ],
       ),
@@ -301,24 +301,24 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (widget.isMasters != true)
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    eventTitle,
-                    style: AppTextStyles.header2,
-                  ),
-                  IconButton(
-                    onPressed: isSearching ? _removeFilter : _showFilterModal,
-                    icon: isSearching
-                        ? Icon(Icons.filter_alt_off_rounded)
-                        : Icon(Icons.filter_alt_rounded),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      eventTitle,
+                      style: AppTextStyles.header2,
+                    ),
+                    IconButton(
+                      onPressed: isSearching ? _removeFilter : _showFilterModal,
+                      icon: isSearching
+                          ? Icon(Icons.filter_alt_off_rounded)
+                          : Icon(Icons.filter_alt_rounded),
+                    ),
+                  ],
+                ),
               ),
-            ),
             exhibitorList.isNotEmpty
                 ? ListView.builder(
                     shrinkWrap: true,
@@ -333,487 +333,447 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                           data: Theme.of(context)
                               .copyWith(dividerColor: AppColor.bgColor),
                           child: ExpansionTile(
-                            iconColor: AppColor.grey,
-                            textColor: AppColor.primary,
-                            title: Row(children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        child: Text(
-                                          'Company ',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
-                                        ),
+                                      Text(
+                                        'Company',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                      Expanded(
                                         child: Text(
-                                          '${exhibitorList[index]['company']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${exhibitorList[index]['company']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 5),
-                                  Row(
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      50,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        child: Text(
-                                          'Contact person',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
-                                        ),
+                                      Text(
+                                        'Contact person',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                      Expanded(
                                         child: Text(
-                                          '${exhibitorList[index]['contact_person']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${exhibitorList[index]['contact_person']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 3),
-                                  Row(
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  width: MediaQuery.of(context).size.width -
+                                      50,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.3,
-                                        child: Text(
-                                          'Contact No',
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: AppColor.grey),
-                                        ),
+                                      Text(
+                                        'Contact No',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                      Expanded(
                                         child: Text(
-                                          '${exhibitorList[index]['contact_no']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${exhibitorList[index]['contact_no']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ]),
-                            childrenPadding: const EdgeInsets.only(left: 14),
+                                ),
+                              ],
+                            ),
+                            tilePadding: EdgeInsets.only(left: 14,right: 5),
+                            // trailing: SizedBox.shrink(),
+                            collapsedIconColor: AppColor.secondary,
+                            childrenPadding:
+                                const EdgeInsets.only(left: 14),
                             children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
+                              Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: MediaQuery.of(context).size.width -
+                                            50,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
-                                                'Stall No',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: AppColor.grey),
-                                              ),
+                                            Text(
+                                              'Stall No',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
+                                            Text(
                                                 '${exhibitorList[index]['stall_no']}',
                                                 style: TextStyle(fontSize: 14),
-                                              ),
-                                            ),
+                                                textAlign: TextAlign.end),
                                           ],
                                         ),
-                                        const SizedBox(height: 5),
-                                        Row(
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width -
+                                            50,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
-                                                'Stall space',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: AppColor.grey),
-                                              ),
+                                            Text(
+                                              'Stall space',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
+                                            Text(
                                                 '${exhibitorList[index]['stall_space']}',
                                                 style: TextStyle(fontSize: 14),
-                                              ),
-                                            ),
+                                                textAlign: TextAlign.end),
                                           ],
                                         ),
-                                        const SizedBox(height: 5),
-                                        Row(
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Container(
+                                        width: MediaQuery.of(context).size.width -
+                                            50,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
-                                                'Square space',
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: AppColor.grey),
-                                              ),
+                                            Text(
+                                              'Square space',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
                                             ),
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.3,
-                                              child: Text(
+                                            Text(
                                                 '${exhibitorList[index]['square_space']}',
                                                 style: TextStyle(fontSize: 14),
-                                              ),
-                                            ),
+                                                textAlign: TextAlign.end),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    // IconButton(
-                                    //   tooltip: "Update Stall details",
-                                    //   icon: Icon(
-                                    //       Icons.edit_note_rounded),
-                                    //   onPressed: () {
-                                    //     showDialog(
-                                    //         context: context,
-                                    //         builder: (BuildContext
-                                    //         context) {
-                                    //           String? dropdownValue;
-                                    //           TextEditingController
-                                    //           textController1 =
-                                    //           TextEditingController();
-                                    //           TextEditingController
-                                    //           textController2 =
-                                    //           TextEditingController();
-                                    //
-                                    //           return AlertDialog(
-                                    //             title: Text(
-                                    //                 "Update Stall details"),
-                                    //             content: Column(
-                                    //               mainAxisSize:
-                                    //               MainAxisSize
-                                    //                   .min,
-                                    //               crossAxisAlignment:
-                                    //               CrossAxisAlignment
-                                    //                   .start,
-                                    //               children: [
-                                    //                 Text(
-                                    //                   'Select Stall Type', // Label text
-                                    //                 ),
-                                    //                 SizedBox(
-                                    //                     height: 8.0),
-                                    //                 Container(
-                                    //                   padding: EdgeInsets
-                                    //                       .symmetric(
-                                    //                       horizontal:
-                                    //                       12.0),
-                                    //                   decoration:
-                                    //                   BoxDecoration(
-                                    //                     border: Border.all(
-                                    //                         color: AppColor
-                                    //                             .secondary), // Border color
-                                    //                     borderRadius:
-                                    //                     BorderRadius
-                                    //                         .circular(
-                                    //                         5.0), // Border radius
-                                    //                   ),
-                                    //                   child:
-                                    //                   DropdownButtonFormField<
-                                    //                       String>(
-                                    //                     value:
-                                    //                     dropdownValue,
-                                    //                     onChanged:
-                                    //                         (String?
-                                    //                     newValue) {
-                                    //                       dropdownValue =
-                                    //                           newValue;
-                                    //                     },
-                                    //                     items: <String>[
-                                    //                       'Shell Space',
-                                    //                       'Bare Space'
-                                    //                     ].map<
-                                    //                         DropdownMenuItem<
-                                    //                             String>>((String
-                                    //                     value) {
-                                    //                       return DropdownMenuItem<
-                                    //                           String>(
-                                    //                         value:
-                                    //                         value,
-                                    //                         child:
-                                    //                         Text(
-                                    //                           value,
-                                    //                           style:
-                                    //                           TextStyle(
-                                    //                             fontSize:
-                                    //                             16.0,
-                                    //                           ),
-                                    //                         ),
-                                    //                       );
-                                    //                     }).toList(),
-                                    //                   ),
-                                    //                 ),
-                                    //                 SizedBox(
-                                    //                     height: 16.0),
-                                    //                 TextField(
-                                    //                   controller:
-                                    //                   textController1,
-                                    //                   decoration:
-                                    //                   InputDecoration(
-                                    //                     labelText:
-                                    //                     'Stall No',
-                                    //                     labelStyle:
-                                    //                     TextStyle(
-                                    //                       color: AppColor
-                                    //                           .black,
-                                    //                     ),
-                                    //                     focusedBorder:
-                                    //                     OutlineInputBorder(
-                                    //                       borderSide:
-                                    //                       BorderSide(
-                                    //                           color:
-                                    //                           AppColor.secondary),
-                                    //                     ),
-                                    //                     border:
-                                    //                     OutlineInputBorder(
-                                    //                       borderSide:
-                                    //                       BorderSide(
-                                    //                         color: AppColor
-                                    //                             .black,
-                                    //                       ),
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //                 SizedBox(
-                                    //                     height: 16.0),
-                                    //                 TextField(
-                                    //                   controller:
-                                    //                   textController2,
-                                    //                   decoration:
-                                    //                   InputDecoration(
-                                    //                     labelText:
-                                    //                     'Square Space',
-                                    //                     labelStyle:
-                                    //                     TextStyle(
-                                    //                       color: AppColor
-                                    //                           .black,
-                                    //                     ),
-                                    //                     focusedBorder:
-                                    //                     OutlineInputBorder(
-                                    //                       borderSide:
-                                    //                       BorderSide(
-                                    //                           color:
-                                    //                           AppColor.secondary),
-                                    //                     ),
-                                    //                     border:
-                                    //                     OutlineInputBorder(
-                                    //                       borderSide:
-                                    //                       BorderSide(
-                                    //                           color:
-                                    //                           AppColor.secondary),
-                                    //                     ), // Add a border around the text field
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             actions: [
-                                    //               TextButton(
-                                    //                 onPressed: () {
-                                    //                   Navigator.of(
-                                    //                       context)
-                                    //                       .pop();
-                                    //                 },
-                                    //                 child: Text(
-                                    //                     'Cancel'),
-                                    //               ),
-                                    //               ElevatedButton(
-                                    //                 onPressed:
-                                    //                     () async {},
-                                    //                 //     {
-                                    //                 //   String stallNo =
-                                    //                 //       textController1
-                                    //                 //           .text;
-                                    //                 //   String sqSpace =
-                                    //                 //       textController2
-                                    //                 //           .text;
-                                    //                 //
-                                    //                 //   var updateResult =
-                                    //                 //   await exhibitorCtrl.stallDetails(
-                                    //                 //       details[
-                                    //                 //       'exhibitor_id'],
-                                    //                 //       stallNo,
-                                    //                 //       dropdownValue,
-                                    //                 //       sqSpace);
-                                    //                 //
-                                    //                 //   Navigator.of(
-                                    //                 //       context)
-                                    //                 //       .pop();
-                                    //                 //   setState(() {});
-                                    //                 // },
-                                    //                 child:
-                                    //                 Text('Save'),
-                                    //               ),
-                                    //             ],
-                                    //           );
-                                    //         });
-                                    //   },
-                                    // ),
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  ),
+                                  // IconButton(
+                                  //   tooltip: "Update Stall details",
+                                  //   icon: Icon(
+                                  //       Icons.edit_note_rounded),
+                                  //   onPressed: () {
+                                  //     showDialog(
+                                  //         context: context,
+                                  //         builder: (BuildContext
+                                  //         context) {
+                                  //           String? dropdownValue;
+                                  //           TextEditingController
+                                  //           textController1 =
+                                  //           TextEditingController();
+                                  //           TextEditingController
+                                  //           textController2 =
+                                  //           TextEditingController();
+                                  //
+                                  //           return AlertDialog(
+                                  //             title: Text(
+                                  //                 "Update Stall details"),
+                                  //             content: Column(
+                                  //               mainAxisSize:
+                                  //               MainAxisSize
+                                  //                   .min,
+                                  //               crossAxisAlignment:
+                                  //               CrossAxisAlignment
+                                  //                   .start,
+                                  //               children: [
+                                  //                 Text(
+                                  //                   'Select Stall Type', // Label text
+                                  //                 ),
+                                  //                 SizedBox(
+                                  //                     height: 8.0),
+                                  //                 Container(
+                                  //                   padding: EdgeInsets
+                                  //                       .symmetric(
+                                  //                       horizontal:
+                                  //                       12.0),
+                                  //                   decoration:
+                                  //                   BoxDecoration(
+                                  //                     border: Border.all(
+                                  //                         color: AppColor
+                                  //                             .secondary), // Border color
+                                  //                     borderRadius:
+                                  //                     BorderRadius
+                                  //                         .circular(
+                                  //                         5.0), // Border radius
+                                  //                   ),
+                                  //                   child:
+                                  //                   DropdownButtonFormField<
+                                  //                       String>(
+                                  //                     value:
+                                  //                     dropdownValue,
+                                  //                     onChanged:
+                                  //                         (String?
+                                  //                     newValue) {
+                                  //                       dropdownValue =
+                                  //                           newValue;
+                                  //                     },
+                                  //                     items: <String>[
+                                  //                       'Shell Space',
+                                  //                       'Bare Space'
+                                  //                     ].map<
+                                  //                         DropdownMenuItem<
+                                  //                             String>>((String
+                                  //                     value) {
+                                  //                       return DropdownMenuItem<
+                                  //                           String>(
+                                  //                         value:
+                                  //                         value,
+                                  //                         child:
+                                  //                         Text(
+                                  //                           value,
+                                  //                           style:
+                                  //                           TextStyle(
+                                  //                             fontSize:
+                                  //                             16.0,
+                                  //                           ),
+                                  //                         ),
+                                  //                       );
+                                  //                     }).toList(),
+                                  //                   ),
+                                  //                 ),
+                                  //                 SizedBox(
+                                  //                     height: 16.0),
+                                  //                 TextField(
+                                  //                   controller:
+                                  //                   textController1,
+                                  //                   decoration:
+                                  //                   InputDecoration(
+                                  //                     labelText:
+                                  //                     'Stall No',
+                                  //                     labelStyle:
+                                  //                     TextStyle(
+                                  //                       color: AppColor
+                                  //                           .black,
+                                  //                     ),
+                                  //                     focusedBorder:
+                                  //                     OutlineInputBorder(
+                                  //                       borderSide:
+                                  //                       BorderSide(
+                                  //                           color:
+                                  //                           AppColor.secondary),
+                                  //                     ),
+                                  //                     border:
+                                  //                     OutlineInputBorder(
+                                  //                       borderSide:
+                                  //                       BorderSide(
+                                  //                         color: AppColor
+                                  //                             .black,
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //                 SizedBox(
+                                  //                     height: 16.0),
+                                  //                 TextField(
+                                  //                   controller:
+                                  //                   textController2,
+                                  //                   decoration:
+                                  //                   InputDecoration(
+                                  //                     labelText:
+                                  //                     'Square Space',
+                                  //                     labelStyle:
+                                  //                     TextStyle(
+                                  //                       color: AppColor
+                                  //                           .black,
+                                  //                     ),
+                                  //                     focusedBorder:
+                                  //                     OutlineInputBorder(
+                                  //                       borderSide:
+                                  //                       BorderSide(
+                                  //                           color:
+                                  //                           AppColor.secondary),
+                                  //                     ),
+                                  //                     border:
+                                  //                     OutlineInputBorder(
+                                  //                       borderSide:
+                                  //                       BorderSide(
+                                  //                           color:
+                                  //                           AppColor.secondary),
+                                  //                     ), // Add a border around the text field
+                                  //                   ),
+                                  //                 ),
+                                  //               ],
+                                  //             ),
+                                  //             actions: [
+                                  //               TextButton(
+                                  //                 onPressed: () {
+                                  //                   Navigator.of(
+                                  //                       context)
+                                  //                       .pop();
+                                  //                 },
+                                  //                 child: Text(
+                                  //                     'Cancel'),
+                                  //               ),
+                                  //               ElevatedButton(
+                                  //                 onPressed:
+                                  //                     () async {},
+                                  //                 //     {
+                                  //                 //   String stallNo =
+                                  //                 //       textController1
+                                  //                 //           .text;
+                                  //                 //   String sqSpace =
+                                  //                 //       textController2
+                                  //                 //           .text;
+                                  //                 //
+                                  //                 //   var updateResult =
+                                  //                 //   await exhibitorCtrl.stallDetails(
+                                  //                 //       details[
+                                  //                 //       'exhibitor_id'],
+                                  //                 //       stallNo,
+                                  //                 //       dropdownValue,
+                                  //                 //       sqSpace);
+                                  //                 //
+                                  //                 //   Navigator.of(
+                                  //                 //       context)
+                                  //                 //       .pop();
+                                  //                 //   setState(() {});
+                                  //                 // },
+                                  //                 child:
+                                  //                 Text('Save'),
+                                  //               ),
+                                  //             ],
+                                  //           );
+                                  //         });
+                                  //   },
+                                  // ),
+                                ],
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Email ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
+                                    Text(
+                                      'Email',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.6,
-                                      child: Text(
+                                    Text(
                                         '${exhibitorList[index]['email']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Company Phone No ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
+                                    Text(
+                                      'Company Phone No',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
+                                    Text(
                                         '${exhibitorList[index]['phone_no']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Address',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
+                                    Text(
+                                      'Address',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
+                                    Text(
                                         '${exhibitorList[index]['address']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
+
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Products :',
+                                      'Products',
                                       style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                          fontSize: 14,
+                                          color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
-                                      child: Text(
+                                    Text(
                                         '${exhibitorList[index]['products']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'No of appointments: ',
+                                      'No of appointments',
                                       style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
+                                          fontSize: 14,
+                                          color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
+                                    Text(
                                         '${exhibitorList[index]['no_of_appointments']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
@@ -822,11 +782,12 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                     await Clipboard.setData(ClipboardData(
                                         text:
                                             "Company: ${exhibitorList[index]['company']}, Contact person: ${exhibitorList[index]['contact_person']}, Contact No: ${exhibitorList[index]['contact_no']},Stall No: ${exhibitorList[index]['stall_no']}, Stall space: ${exhibitorList[index]['stall_space']}, Square space: ${exhibitorList[index]['square_space']}, Email: ${exhibitorList[index]['email']}, Company Phone No: ${exhibitorList[index]['phone_no']}, Address: ${exhibitorList[index]['address']}, Products: ${exhibitorList[index]['products']}"));
-                                    ScaffoldMessenger.of(context).showSnackBar(
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(
                                       const SnackBar(
                                         backgroundColor: Colors.green,
-                                        content:
-                                            Text('Exhibitor Details Copied'),
+                                        content: Text(
+                                            'Exhibitor Details Copied'),
                                       ),
                                     );
                                   },
