@@ -396,7 +396,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     width: MediaQuery.of(context).size.width,
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'Name',
@@ -418,7 +418,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     width: MediaQuery.of(context).size.width,
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'Organization',
@@ -440,7 +440,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     width: MediaQuery.of(context).size.width,
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           'Designation',
@@ -458,7 +458,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     ),
                                   ),
                                 ]),
-                            tilePadding: EdgeInsets.only(left: 14,right: 5),
+                            tilePadding: EdgeInsets.only(left: 14, right: 5),
                             collapsedIconColor: AppColor.secondary,
                             childrenPadding: const EdgeInsets.only(left: 14),
                             children: [
@@ -467,16 +467,14 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Mobile No',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${visitorList[index]['mobile_no']}',
+                                    Text('${visitorList[index]['mobile_no']}',
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.end),
                                   ],
@@ -488,16 +486,14 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Email',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${visitorList[index]['email']}',
+                                    Text('${visitorList[index]['email']}',
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.end),
                                   ],
@@ -509,13 +505,12 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Known source',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Text(
                                         '${visitorList[index]['known_sources']}',
@@ -530,13 +525,12 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'City, State ',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Text(
                                         '${visitorList[index]['city']}, ${visitorList[index]['state']} ',
@@ -551,16 +545,14 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Address',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${visitorList[index]['address']}',
+                                    Text('${visitorList[index]['address']}',
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.end),
                                   ],
@@ -572,16 +564,14 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Pincode',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${visitorList[index]['pincode']}',
+                                    Text('${visitorList[index]['pincode']}',
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.end),
                                   ],
@@ -593,16 +583,19 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Nature of Business',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Text(
-                                        visitorList[index]['nature_of_business'] != null ? '${visitorList[index]['nature_of_business']}' : '',
+                                        visitorList[index]
+                                                    ['nature_of_business'] !=
+                                                null
+                                            ? '${visitorList[index]['nature_of_business']}'
+                                            : '',
                                         style: TextStyle(fontSize: 14),
                                         textAlign: TextAlign.end),
                                   ],
@@ -614,13 +607,12 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Reason for visit',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Expanded(
                                       child: Text(
@@ -637,13 +629,12 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Product looking for',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Expanded(
                                       child: Text(
@@ -660,13 +651,12 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'No of appointments',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          color: AppColor.grey),
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
                                     Expanded(
                                       child: Text(
