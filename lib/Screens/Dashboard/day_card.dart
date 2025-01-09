@@ -41,17 +41,12 @@ class DayCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  day,
-                  style: AppTextStyles.text3.copyWith(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
+            Text(
+              day,
+              style: AppTextStyles.text3.copyWith(
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+              ),
             ),
             AppSpaces.verticalSpace5,
             Text(
@@ -59,7 +54,7 @@ class DayCard extends StatelessWidget {
               style: AppTextStyles.text4.copyWith(
                 color: AppColor.primary,
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 14,
               ),
             ),
             AppSpaces.verticalSpace5,
@@ -77,7 +72,7 @@ class DayCard extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -116,7 +111,7 @@ class DayCard extends StatelessWidget {
                               : '0%',
                           style: TextStyle(
                             color: AppColor.secondary,
-                            fontSize: 14,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -164,7 +159,7 @@ class DayCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                 ],

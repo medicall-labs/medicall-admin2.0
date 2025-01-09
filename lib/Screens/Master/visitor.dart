@@ -397,6 +397,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Name',
@@ -419,6 +420,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Organization',
@@ -441,6 +443,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Designation',
@@ -487,6 +490,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Email',
@@ -608,6 +612,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Reason for visit',
@@ -630,6 +635,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       'Product looking for',

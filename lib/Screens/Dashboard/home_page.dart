@@ -6,12 +6,9 @@ import 'package:admin_medicall/Providers/local_data.dart';
 import 'package:admin_medicall/Screens/Dashboard/insights.dart';
 import 'package:admin_medicall/Screens/Dashboard/non_live.dart';
 import 'package:admin_medicall/Utils/Constants/app_color.dart';
-import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:admin_medicall/Utils/primary_tab_buttons.dart';
 import 'package:provider/provider.dart';
-
-import '../Business_Card/pages/business_card.dart';
 import '../Business_Card/pages/scan_page.dart';
 import 'master_details.dart';
 
@@ -26,6 +23,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late final ValueNotifier<int> _settingsButtonTrigger;
 
+  late bool keyPressed = false;
+
   var eventDetails = GetStorage().read("event_details") != ''
       ? GetStorage().read("event_details")
       : '';
@@ -38,7 +37,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColor.bgColor,
       appBar: AppBar(
@@ -79,43 +77,62 @@ class _HomePageState extends State<HomePage> {
                       itemIndex: 0,
                       notifier: _settingsButtonTrigger,
                       onTap: () {
-                        // Update the local event ID to 54 when "Live" tab is pressed
+                        setState(() {
+                          keyPressed = false;
+                        });
                         Provider.of<LocalDataProvider>(context, listen: false)
-                            .changeEventDetails(eventDetails['currentEventId'],
-                            eventDetails['currentAndPreviousEvents'][0]['title']);
+                            .changeEventDetails(
+                                eventDetails['currentEventId'],
+                                eventDetails['currentAndPreviousEvents'][0]
+                                    ['title']);
                       },
                     ),
+                    keyPressed == false ?
                     PrimaryTabButton(
                         buttonText: "Completed",
                         itemIndex: 1,
-                        notifier: _settingsButtonTrigger),
+                        notifier: _settingsButtonTrigger,
+                    onTap: (){
+                          setState(() {
+                            keyPressed = true;
+                          });
+                    },) : SizedBox.shrink(),
+                    keyPressed == false ?
                     PrimaryTabButton(
                         buttonText: "Upcoming",
                         itemIndex: 2,
-                        notifier: _settingsButtonTrigger),
+                        notifier: _settingsButtonTrigger,
+                      onTap: (){
+                        setState(() {
+                          keyPressed = true;
+                        });
+                      },) : SizedBox.shrink(),
                     PrimaryTabButton(
                         buttonText: "Masters",
                         itemIndex: 3,
-                        notifier: _settingsButtonTrigger)
+                        notifier: _settingsButtonTrigger,
+                      onTap: (){
+                        setState(() {
+                          keyPressed = false;
+                        });
+                      },)
                   ],
                 ),
               ),
-              AppSpaces.verticalSpace20,
               ValueListenableBuilder(
                   valueListenable: _settingsButtonTrigger,
                   builder: (BuildContext context, _, __) {
-                    // Pass the eventId to Insights and NonLiveData widgets
                     return _settingsButtonTrigger.value == 0
-                        ? Insights() // Pass eventId
+                        ? Insights()
                         : _settingsButtonTrigger.value == 1
-                        ? NonLiveData(
-                      nonLiveEvent: 'Completed',
-                    )
-                        : _settingsButtonTrigger.value == 2
-                        ? NonLiveData(
-                      nonLiveEvent: 'Upcoming',
-                    )
-                        : MasterDetails();
+                            ? NonLiveData(
+                                nonLiveEvent: 'Completed',
+                              )
+                            : _settingsButtonTrigger.value == 2
+                                ? NonLiveData(
+                                    nonLiveEvent: 'Upcoming',
+                                  )
+                                : MasterDetails();
                   })
             ]),
           )
@@ -125,7 +142,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColor.secondary,
         heroTag: null,
         onPressed: () => Get.to(ScanPage()),
-        child: Icon(Icons.document_scanner_outlined,color: Colors.white,),
+        child: Icon(
+          Icons.document_scanner_outlined,
+          color: Colors.white,
+        ),
       ),
     );
   }

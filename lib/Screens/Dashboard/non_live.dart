@@ -50,10 +50,8 @@ class _NonLiveDataState extends State<NonLiveData> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedEventId = event['id']; // Update the selected event ID
-                selectedEventTitle = event['title']; // Update the selected event title
-
-                // Change the event ID and title in LocalDataProvider
+                selectedEventId = event['id'];
+                selectedEventTitle = event['title'];
                 Provider.of<LocalDataProvider>(context, listen: false)
                     .changeEventDetails(selectedEventId!, selectedEventTitle!);
               });

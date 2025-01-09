@@ -6,12 +6,12 @@ import 'app_color.dart';
 
 class AppTextStyles {
   static final TextStyle header = GoogleFonts.lato(
-      fontWeight: FontWeight.bold, fontSize: 20.sp, color: AppColor.black);
+      fontWeight: FontWeight.bold, fontSize: 22.sp, color: AppColor.black);
   static final TextStyle header1 = GoogleFonts.lato(
-      fontWeight: FontWeight.bold, fontSize: 18.sp, color: Colors.white);
+      fontWeight: FontWeight.bold, fontSize: 20.sp, color: Colors.white);
 
   static final TextStyle header2 = GoogleFonts.lato(
-      fontSize: 16.sp, fontWeight: FontWeight.bold, color: AppColor.primary);
+      fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColor.primary);
 
   static final TextStyle label = GoogleFonts.lato(
       fontSize: 14.sp, fontWeight: FontWeight.bold, color: AppColor.black);

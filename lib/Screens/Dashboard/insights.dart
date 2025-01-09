@@ -43,10 +43,7 @@ class _InsightsState extends State<Insights> {
 
   @override
   Widget build(BuildContext context) {
-    // Access the LocalDataProvider
     final localDataProvider = Provider.of<LocalDataProvider>(context);
-
-    // Get the event ID from LocalDataProvider
     final eventId = localDataProvider.eventId;
 
     var eventDetails = GetStorage().read("event_details") != ''
@@ -56,7 +53,7 @@ class _InsightsState extends State<Insights> {
     return SingleChildScrollView(
       child: FutureBuilder(
         future: RemoteService().getDataFromApi(
-            '$baseUrl/admin/dashboard?event_id=$eventId'), // Use the fetched eventId
+            '$baseUrl/admin/dashboard?event_id=$eventId'),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
