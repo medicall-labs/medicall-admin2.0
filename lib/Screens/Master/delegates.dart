@@ -267,10 +267,12 @@ class _DelegatesState extends State<Delegates> {
                                                   fontSize: 14,
                                                   color: AppColor.grey),
                                             ),
-                                            Text(
-                                                '${delegatesList[index]['name']}',
-                                                style: TextStyle(fontSize: 14),
-                                                textAlign: TextAlign.end),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['name']}',
+                                                  style: TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
                                           ],
                                         ),
                                       ),
