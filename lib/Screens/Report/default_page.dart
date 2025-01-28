@@ -8,9 +8,12 @@ import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:provider/provider.dart';
 
-class DefaultPage extends StatelessWidget {
-  const DefaultPage({super.key});
+import '../../Utils/Widgets/access_denied.dart';
 
+class DefaultPage extends StatelessWidget {
+  DefaultPage({super.key});
+
+  var storedData = GetStorage().read("local_store");
   @override
   Widget build(BuildContext context) {
     final eventDetails = GetStorage().read("event_details") != ''
@@ -35,15 +38,15 @@ class DefaultPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Column(
           children: <Widget>[
-            if(eventDetails['currentEventId'] <= eventId)
-            _buildListTile(
-              context,
-              title: 'Last 7 Days Count',
-              eventTitle: eventTitle,
-              eventId: eventId,
-              destinationScreen:
-                  Last7DaysCount(eventTitle: eventTitle, eventId: eventId),
-            ),
+            if (eventDetails['currentEventId'] <= eventId)
+              _buildListTile(
+                context,
+                title: 'Last 7 Days Count',
+                eventTitle: eventTitle,
+                eventId: eventId,
+                destinationScreen:
+                    Last7DaysCount(eventTitle: eventTitle, eventId: eventId),
+              ),
             _buildListTile(
               context,
               title: 'Top Cities Count',
@@ -133,7 +136,7 @@ class DefaultPage extends StatelessWidget {
     required String eventTitle,
     required String title,
     required int eventId,
-    required Widget destinationScreen, // New parameter for destination screen
+    required Widget destinationScreen,
   }) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
@@ -145,9 +148,13 @@ class DefaultPage extends StatelessWidget {
         title: Text(title, style: AppTextStyles.label),
         trailing: const Icon(Icons.arrow_forward_ios_rounded,
             color: Colors.grey, size: 15),
-        onTap: () {
-          Get.to(destinationScreen); // Navigate to the specified screen
-        },
+        onTap: storedData['data']['permissions']['can_reports'] == true
+            ? () {
+                Get.to(destinationScreen);
+              }
+            : () {
+                showAccessDeniedSnackbar();
+              },
       ),
     );
   }
