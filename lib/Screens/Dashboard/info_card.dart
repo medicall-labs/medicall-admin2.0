@@ -5,6 +5,7 @@ import 'package:admin_medicall/Screens/Master/visitor.dart';
 import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../Master/delegates.dart';
 
@@ -21,14 +22,25 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var storedData = GetStorage().read("local_store");
+
     return GestureDetector(
       onTap: () {
-        Get.to(title == 'Exhibitors'
-            ? ExhibitorMaster()
-            : title == 'Visitors'
-                ? VisitorMaster()
-                : Delegates());
+        Widget? targetPage;
+        if (title == 'Exhibitors' && storedData['data']['permissions']['can_view_exhibitor'] == true) {
+          targetPage = ExhibitorMaster();
+        } else if (title == 'Visitors' && storedData['data']['permissions']['can_view_visitor'] == true) {
+          targetPage = VisitorMaster();
+        } else if (storedData['data']['permissions']['can_view_delegate'] == true) {
+          targetPage = Delegates();
+        }
+        if (targetPage != null) {
+          Get.to(targetPage);
+        } else {
+          Get.snackbar(backgroundColor: Colors.white,'Access Denied', 'You do not have permission to access this page.');
+        }
       },
+
       child: Container(
         width: MediaQuery.of(context).size.width * 0.3,
         padding: const EdgeInsets.all(10),
