@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'Providers/auth_provider.dart';
+import 'Screens/Business_Card/providers/contact_provider.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
           ChangeNotifierProvider(create: (context) => LocalDataProvider()),
+          ChangeNotifierProvider(create: (context) => ContactProvider()),
         ],
         child: GetMaterialApp(
           title: 'Medicall Admin',

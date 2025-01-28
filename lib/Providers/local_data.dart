@@ -23,8 +23,6 @@ class LocalDataProvider extends ChangeNotifier {
   void changeEventDetails(int id, String title) {
     eventId = id;
     eventTitle = title; // Update the title
-    print(
-        'Ruby ----- $eventId ---- $eventTitle');
     notifyListeners();
 
     // Save to GetStorage (optional if you want to persist the changes)

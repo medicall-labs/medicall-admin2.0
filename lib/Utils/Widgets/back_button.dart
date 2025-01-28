@@ -19,6 +19,7 @@ class NavigationBack extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               border: Border.all(
                 width: 3,
+                // color: Colors.white
               )),
           child: Center(
               child: Icon(Icons.arrow_back,
