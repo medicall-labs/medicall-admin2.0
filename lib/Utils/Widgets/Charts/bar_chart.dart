@@ -117,7 +117,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                         child: Text(
                           currentData[value.toInt()].key ?? 'Unknown',
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -138,7 +138,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
                       child: Text(
                         value.toInt().toString(),
                         style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 10,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),

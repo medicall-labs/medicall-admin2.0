@@ -27,30 +27,23 @@ class _InsightsState extends State<Insights> {
 
   int calculateTotalRegisteredCount(Map<String, dynamic> dayData) {
     int total = 0;
-    if (dayData != null) {
-      dayData.forEach((key, value) {
-        total += (value['total_register_count'] as int?) ?? 0;
-      });
-    }
-    return total;
+    dayData.forEach((key, value) {
+      total += (value['total_register_count'] as int?) ?? 0;
+    });
+      return total;
   }
 
   int calculateTotalVisitedCount(Map<String, dynamic> dayData) {
     int total = 0;
-    if (dayData != null) {
-      dayData.forEach((key, value) {
-        total += (value['visited_count'] as int?) ?? 0;
-      });
-    }
-    return total;
+    dayData.forEach((key, value) {
+      total += (value['visited_count'] as int?) ?? 0;
+    });
+      return total;
   }
 
   @override
   Widget build(BuildContext context) {
-    // Access the LocalDataProvider
     final localDataProvider = Provider.of<LocalDataProvider>(context);
-
-    // Get the event ID from LocalDataProvider
     final eventId = localDataProvider.eventId;
 
     var eventDetails = GetStorage().read("event_details") != ''
@@ -60,7 +53,7 @@ class _InsightsState extends State<Insights> {
     return SingleChildScrollView(
       child: FutureBuilder(
         future: RemoteService().getDataFromApi(
-            '$baseUrl/admin/dashboard?event_id=$eventId'), // Use the fetched eventId
+            '$baseUrl/admin/dashboard?event_id=$eventId'),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

@@ -48,6 +48,12 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => ContactProvider()),
         ],
         child: GetMaterialApp(
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+              child: child!,
+            );
+          },
           title: 'Medicall Admin',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

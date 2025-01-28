@@ -329,7 +329,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          widget.isMasters == true ? 'Visitor Master' : 'Visitor',
+          widget.isMasters == true ? 'Visitor Master' : 'Visitors List',
           style: AppTextStyles.header1,
         ),
         actions: [
@@ -388,321 +388,287 @@ class _VisitorMasterState extends State<VisitorMaster> {
                           data: Theme.of(context)
                               .copyWith(dividerColor: AppColor.bgColor),
                           child: ExpansionTile(
-                            iconColor: AppColor.grey,
-                            textColor: AppColor.primary,
-                            title: Row(children: [
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
+                            textColor: AppColor.secondary,
+                            title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.3,
-                                          child: Text(
-                                            'Name ',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: AppColor.grey),
-                                          ),
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
                                         ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                                        Expanded(
                                           child: Text(
-                                            '${visitorList[index]['salutation']} ${visitorList[index]['name']}',
-                                            style: TextStyle(fontSize: 14),
-                                          ),
+                                              '${visitorList[index]['salutation']} ${visitorList[index]['name']}',
+                                              style: TextStyle(fontSize: 14),
+                                              textAlign: TextAlign.end),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 5),
-                                    Row(
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.3,
-                                          child: Text(
-                                            'Organization ',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: AppColor.grey),
-                                          ),
+                                        Text(
+                                          'Organization',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
                                         ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                                        Expanded(
                                           child: Text(
-                                            '${visitorList[index]['organization']}',
-                                            style: TextStyle(fontSize: 14),
-                                          ),
+                                              '${visitorList[index]['organization']}',
+                                              style: TextStyle(fontSize: 14),
+                                              textAlign: TextAlign.end),
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 5),
-                                    Row(
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.3,
-                                          child: Text(
-                                            'Designation ',
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: AppColor.grey),
-                                          ),
+                                        Text(
+                                          'Designation',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColor.grey),
                                         ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.4,
+                                        Expanded(
                                           child: Text(
-                                            '${visitorList[index]['designation']}',
-                                            style: TextStyle(fontSize: 14),
-                                          ),
+                                              '${visitorList[index]['designation']}',
+                                              style: TextStyle(fontSize: 14),
+                                              textAlign: TextAlign.end),
                                         ),
                                       ],
                                     ),
-                                  ]),
-                            ]),
+                                  ),
+                                ]),
+                            tilePadding: EdgeInsets.only(left: 14, right: 5),
+                            collapsedIconColor: AppColor.secondary,
                             childrenPadding: const EdgeInsets.only(left: 14),
                             children: [
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Mobile No ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${visitorList[index]['mobile_no']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Email ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${visitorList[index]['email']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Known source  ',
+                                      'Mobile No',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
+                                    Text('${visitorList[index]['mobile_no']}',
+                                        style: TextStyle(fontSize: 14),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Email',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Text('${visitorList[index]['email']}',
+                                        style: TextStyle(fontSize: 14),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Known source',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Text(
                                         '${visitorList[index]['known_sources']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'City, State ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
+                                    Text(
+                                      'City, State ',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
+                                    Text(
                                         '${visitorList[index]['city']}, ${visitorList[index]['state']} ',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Address ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${visitorList[index]['address']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        'Pincode ',
-                                        style: TextStyle(
-                                            fontSize: 14, color: AppColor.grey),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${visitorList[index]['pincode']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Nature of Business :',
+                                      'Address',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      child: Text(
-                                        '${visitorList[index]['nature_of_business']}',
+                                    Text('${visitorList[index]['address']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Pincode',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Text('${visitorList[index]['pincode']}',
+                                        style: TextStyle(fontSize: 14),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Nature of Business',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Text(
+                                        visitorList[index]
+                                                    ['nature_of_business'] !=
+                                                null
+                                            ? '${visitorList[index]['nature_of_business']}'
+                                            : '',
+                                        style: TextStyle(fontSize: 14),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Reason for visit',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          '${visitorList[index]['reason_for_visit']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
                                     ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Reason for visit :',
+                                      'Product looking for',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                    Expanded(
                                       child: Text(
-                                        '${visitorList[index]['reason_for_visit']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
+                                          '${visitorList[index]['product_looking_for']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
                                     ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Product looking for :',
+                                      'No of appointments',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                    Expanded(
                                       child: Text(
-                                        '${visitorList[index]['product_looking_for']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'No of appointments:',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.3,
-                                      child: Text(
-                                        '${visitorList[index]['no_of_appointments']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
+                                          '${visitorList[index]['no_of_appointments']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
                                     ),
                                   ],
                                 ),
