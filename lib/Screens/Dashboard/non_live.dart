@@ -7,6 +7,8 @@ import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:provider/provider.dart';
 
+import '../../Utils/Widgets/access_denied.dart';
+
 class NonLiveData extends StatefulWidget {
   final String nonLiveEvent;
 
@@ -63,10 +65,7 @@ class _NonLiveDataState extends State<NonLiveData> {
                     });
                   }
                 : () {
-                    Get.snackbar(
-                        backgroundColor: Colors.white,
-                        ' Access Denied ',
-                        'You do not have permission to access this page.');
+                    showAccessDeniedSnackbar();
                   },
             child: Card(
               child: Container(

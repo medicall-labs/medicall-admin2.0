@@ -15,6 +15,8 @@ import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:provider/provider.dart';
 
+import '../../Utils/Widgets/access_denied.dart';
+
 class Insights extends StatefulWidget {
   Insights({super.key});
 
@@ -24,13 +26,14 @@ class Insights extends StatefulWidget {
 
 class _InsightsState extends State<Insights> {
   var baseUrl = AppUrl.baseUrl;
+  var storedData = GetStorage().read("local_store");
 
   int calculateTotalRegisteredCount(Map<String, dynamic> dayData) {
     int total = 0;
     dayData.forEach((key, value) {
       total += (value['total_register_count'] as int?) ?? 0;
     });
-      return total;
+    return total;
   }
 
   int calculateTotalVisitedCount(Map<String, dynamic> dayData) {
@@ -38,7 +41,7 @@ class _InsightsState extends State<Insights> {
     dayData.forEach((key, value) {
       total += (value['visited_count'] as int?) ?? 0;
     });
-      return total;
+    return total;
   }
 
   @override
@@ -52,8 +55,8 @@ class _InsightsState extends State<Insights> {
 
     return SingleChildScrollView(
       child: FutureBuilder(
-        future: RemoteService().getDataFromApi(
-            '$baseUrl/admin/dashboard?event_id=$eventId'),
+        future: RemoteService()
+            .getDataFromApi('$baseUrl/admin/dashboard?event_id=$eventId'),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -183,11 +186,17 @@ class _InsightsState extends State<Insights> {
                         child: Column(
                           children: <Widget>[
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'Appointment',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'Appointment',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -207,11 +216,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'scheduled',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'scheduled',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -230,11 +245,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'rescheduled',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'rescheduled',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -253,11 +274,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'no-show',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'no-show',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -276,11 +303,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'cancelled',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'cancelled',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -299,11 +332,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'completed',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'completed',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(
@@ -322,11 +361,17 @@ class _InsightsState extends State<Insights> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                Get.to(ShowAppointment(
-                                  heading: 'Appointment',
-                                ));
-                              },
+                              onTap: storedData['data']['permissions']
+                                          ['can_view_appointment'] ==
+                                      true
+                                  ? () {
+                                      Get.to(ShowAppointment(
+                                        heading: 'Appointment',
+                                      ));
+                                    }
+                                  : () {
+                                      showAccessDeniedSnackbar();
+                                    },
                               child: Container(
                                 margin: EdgeInsets.symmetric(vertical: 3),
                                 decoration: BoxDecoration(

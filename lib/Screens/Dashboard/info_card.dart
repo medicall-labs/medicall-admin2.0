@@ -7,6 +7,7 @@ import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../Utils/Widgets/access_denied.dart';
 import '../Master/delegates.dart';
 
 class InfoCard extends StatelessWidget {
@@ -27,20 +28,22 @@ class InfoCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Widget? targetPage;
-        if (title == 'Exhibitors' && storedData['data']['permissions']['can_view_exhibitor'] == true) {
+        if (title == 'Exhibitors' &&
+            storedData['data']['permissions']['can_view_exhibitor'] == true) {
           targetPage = ExhibitorMaster();
-        } else if (title == 'Visitors' && storedData['data']['permissions']['can_view_visitor'] == true) {
+        } else if (title == 'Visitors' &&
+            storedData['data']['permissions']['can_view_visitor'] == true) {
           targetPage = VisitorMaster();
-        } else if (storedData['data']['permissions']['can_view_delegate'] == true) {
+        } else if (title == 'Delegates' &&
+            storedData['data']['permissions']['can_view_delegate'] == true) {
           targetPage = Delegates();
         }
         if (targetPage != null) {
           Get.to(targetPage);
         } else {
-          Get.snackbar(backgroundColor: Colors.white,'Access Denied', 'You do not have permission to access this page.');
+          showAccessDeniedSnackbar();
         }
       },
-
       child: Container(
         width: MediaQuery.of(context).size.width * 0.3,
         padding: const EdgeInsets.all(10),
