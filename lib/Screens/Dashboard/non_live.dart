@@ -65,7 +65,7 @@ class _NonLiveDataState extends State<NonLiveData> {
                 : () {
                     Get.snackbar(
                         backgroundColor: Colors.white,
-                        'Access Denied',
+                        ' Access Denied ',
                         'You do not have permission to access this page.');
                   },
             child: Card(
