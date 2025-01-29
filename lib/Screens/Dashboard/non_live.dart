@@ -52,10 +52,14 @@ class _NonLiveDataState extends State<NonLiveData> {
               ? eventDetails['currentAndPreviousEvents'][index + 1]
               : eventDetails['currentAndUpcomingEvents'][index + 1];
           return GestureDetector(
-            onTap: storedData['data']['permissions']
-                        ['can_view_previous_event'] ==
-                    true
+            onTap: (widget.nonLiveEvent == 'Completed' &&
+                    storedData['data']['permissions']
+                            ['can_view_previous_event'] !=
+                        true)
                 ? () {
+                    showAccessDeniedSnackbar();
+                  }
+                : () {
                     setState(() {
                       selectedEventId = event['id'];
                       selectedEventTitle = event['title'];
@@ -63,9 +67,6 @@ class _NonLiveDataState extends State<NonLiveData> {
                           .changeEventDetails(
                               selectedEventId!, selectedEventTitle!);
                     });
-                  }
-                : () {
-                    showAccessDeniedSnackbar();
                   },
             child: Card(
               child: Container(
