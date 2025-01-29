@@ -9,6 +9,7 @@ import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:admin_medicall/Utils/primary_tab_buttons.dart';
 import 'package:provider/provider.dart';
+import '../../Utils/Constants/spacing.dart';
 import '../Business_Card/pages/scan_page.dart';
 import 'master_details.dart';
 
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   var eventDetails = GetStorage().read("event_details") != ''
       ? GetStorage().read("event_details")
       : '';
+  var storedData = GetStorage().read("local_store");
 
   @override
   void initState() {
@@ -42,9 +44,25 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: AppColor.secondary,
         automaticallyImplyLeading: false,
-        title: Text(
-          'My Events',
-          style: AppTextStyles.header1,
+        title: Row(
+          children: [
+            Text(
+              'Hello ${storedData['data']['name'].split(' ')[0]}',
+              style: AppTextStyles.header1,
+            ),
+            AppSpaces.horizontalSpace10,
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 4,horizontal: 8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white,
+              ),
+              child:Text(
+                storedData['data']['role'] ?? '',
+                style: AppTextStyles.whiteLabel2.copyWith(color: AppColor.primary),
+              ),
+            )
+          ],
         ),
         actions: [
           Padding(

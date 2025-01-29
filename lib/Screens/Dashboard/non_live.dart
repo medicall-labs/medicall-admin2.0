@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Providers/local_data.dart';
 import 'package:admin_medicall/Screens/Dashboard/insights.dart';
 import 'package:admin_medicall/Utils/Constants/app_color.dart';
 import 'package:admin_medicall/Utils/Constants/styles.dart';
 import 'package:provider/provider.dart';
+
+import '../../Utils/Widgets/access_denied.dart';
 
 class NonLiveData extends StatefulWidget {
   final String nonLiveEvent;
@@ -19,6 +22,7 @@ class _NonLiveDataState extends State<NonLiveData> {
   final eventDetails = GetStorage().read("event_details") != ''
       ? GetStorage().read("event_details")
       : '';
+  var storedData = GetStorage().read("local_store");
 
   int? selectedEventId;
   String? selectedEventTitle;
@@ -48,14 +52,22 @@ class _NonLiveDataState extends State<NonLiveData> {
               ? eventDetails['currentAndPreviousEvents'][index + 1]
               : eventDetails['currentAndUpcomingEvents'][index + 1];
           return GestureDetector(
-            onTap: () {
-              setState(() {
-                selectedEventId = event['id'];
-                selectedEventTitle = event['title'];
-                Provider.of<LocalDataProvider>(context, listen: false)
-                    .changeEventDetails(selectedEventId!, selectedEventTitle!);
-              });
-            },
+            onTap: (widget.nonLiveEvent == 'Completed' &&
+                    storedData['data']['permissions']
+                            ['can_view_previous_event'] !=
+                        true)
+                ? () {
+                    showAccessDeniedSnackbar();
+                  }
+                : () {
+                    setState(() {
+                      selectedEventId = event['id'];
+                      selectedEventTitle = event['title'];
+                      Provider.of<LocalDataProvider>(context, listen: false)
+                          .changeEventDetails(
+                              selectedEventId!, selectedEventTitle!);
+                    });
+                  },
             child: Card(
               child: Container(
                 decoration: BoxDecoration(
@@ -91,7 +103,6 @@ class _NonLiveDataState extends State<NonLiveData> {
     );
   }
 }
-
 
 // old code
 // import 'package:flutter/material.dart';
@@ -187,7 +198,6 @@ class _NonLiveDataState extends State<NonLiveData> {
 //     );
 //   }
 // }
-
 
 // old  old code
 // import 'package:flutter/material.dart';

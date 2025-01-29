@@ -508,7 +508,7 @@ class _ShowAppointmentState extends State<ShowAppointment> {
                 : !isLoading
                     ? const Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Center(child: Text('No exhibitors found')),
+                        child: Center(child: Text('No appointments')),
                       )
                     : Container(),
             if (isLoading)
@@ -519,7 +519,7 @@ class _ShowAppointmentState extends State<ShowAppointment> {
             if (!hasMore && appointmentList.isNotEmpty)
               const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Center(child: Text('No more exhibitors')),
+                child: Center(child: Text('No more appointments')),
               ),
           ],
         ),

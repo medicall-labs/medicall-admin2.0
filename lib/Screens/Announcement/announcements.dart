@@ -26,6 +26,7 @@ class _AnnouncementsState extends State<Announcements> {
   final storage = GetStorage(); // Initialize GetStorage
   var eventDetails;
   late var localDataProvider;
+  var storedData = GetStorage().read("local_store");
   @override
   void initState() {
     super.initState();
@@ -314,7 +315,9 @@ class _AnnouncementsState extends State<Announcements> {
         ),
       ),
       backgroundColor: AppColor.bgColor,
-      body: FutureBuilder(
+      body:
+      storedData['data']['permissions']['can_view_announcement'] == true ?
+      FutureBuilder(
         future: RemoteService()
             .getDataFromApi('$baseUrl/admin/announcements?event_id=$eventId'),
         builder: (context, snapshot) {
@@ -381,11 +384,15 @@ class _AnnouncementsState extends State<Announcements> {
             return const Center(child: Text('No announcements available.'));
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddAnnouncementDialog,
-        child: const Icon(Icons.add),
-      ),
+      ) :
+      Center(child: Text('You do not have permission to access this page.'),),
+      floatingActionButton:
+          storedData['data']['permissions']['can_create_announcement'] == true
+              ? FloatingActionButton(
+                  onPressed: _showAddAnnouncementDialog,
+                  child: const Icon(Icons.add),
+                )
+              : null,
     );
   }
 }

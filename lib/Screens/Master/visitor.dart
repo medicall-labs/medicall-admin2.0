@@ -657,6 +657,28 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Created at',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          '${visitorList[index]['created_at']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
