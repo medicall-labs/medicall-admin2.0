@@ -335,7 +335,13 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          widget.isMasters == true ? 'Visitor Master' : 'Visitors List',
+          widget.isMasters == true && widget.is10tVisitors == true
+              ? '10t Visitor Master'
+              : widget.isMasters == true && widget.is10tVisitors == false
+                  ? 'Visitor Master'
+                  : widget.isMasters == false && widget.is10tVisitors == true
+                      ? '10t Visitors List'
+                      : 'Visitors List',
           style: AppTextStyles.header1,
         ),
         actions: [
