@@ -753,10 +753,12 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                           fontSize: 14,
                                           color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${exhibitorList[index]['products']}',
-                                        style: TextStyle(fontSize: 14),
-                                        textAlign: TextAlign.end),
+                                    Expanded(
+                                      child: Text(
+                                          '${exhibitorList[index]['products']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
+                                    ),
                                   ],
                                 ),
                               ),
