@@ -224,21 +224,22 @@ class _VisitorMasterState extends State<VisitorMaster> {
                   ),
                 ],
               ),
-              DropdownButtonFormField<String>(
-                value: selectedType,
-                decoration: InputDecoration(labelText: 'Type'),
-                items: ['web', 'medicall', 'online', 'whatsapp']
-                    .map((type) => DropdownMenuItem(
-                          value: type,
-                          child: Text(type),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedType = value;
-                  });
-                },
-              ),
+              if (widget.is10tVisitors != true)
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  decoration: InputDecoration(labelText: 'Type'),
+                  items: ['web', 'medicall', 'online', 'whatsapp']
+                      .map((type) => DropdownMenuItem(
+                            value: type,
+                            child: Text(type),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value;
+                    });
+                  },
+                ),
               DropdownButtonFormField<String>(
                 value: participateStatus,
                 decoration: InputDecoration(labelText: 'Participate Status'),
