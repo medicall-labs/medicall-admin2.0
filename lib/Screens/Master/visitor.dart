@@ -74,9 +74,6 @@ class _VisitorMasterState extends State<VisitorMaster> {
       isLoading = true;
     });
 
-    print('5400 ----->>>  ${widget.isMasters}');
-    print('5400 ----->>>  ${widget.is10tVisitors}');
-
     String query = widget.isMasters == true && widget.is10tVisitors == false
         ? '$baseUrl/admin/visitors?cursor=$nextCursor'
         : widget.isMasters == true && widget.is10tVisitors == true
@@ -84,8 +81,6 @@ class _VisitorMasterState extends State<VisitorMaster> {
             : widget.isMasters == false && widget.is10tVisitors == true
                 ? '$baseUrl/admin/visitors?event_id=$eventId&registration_type=10t&cursor=$nextCursor'
                 : '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
-
-    print('5400 ----->>>  ${query}');
 
     if (searchController.text.isNotEmpty) {
       query += '&search=${searchController.text}';
