@@ -143,11 +143,12 @@ class _DelegatesState extends State<Delegates> {
               DropdownButtonFormField<String>(
                 value: selectedSeminarId,
                 decoration: InputDecoration(labelText: 'Select Seminar'),
+                isExpanded: true,
                 items: seminarList.map<DropdownMenuItem<String>>((seminar) {
                   return DropdownMenuItem<String>(
-                    value: seminar['id'].toString(), // Use seminar ID as value
+                    value: seminar['id'].toString(),
                     child: Text(
-                        seminar['title']), // Show seminar title in dropdown
+                        seminar['title']),
                   );
                 }).toList(),
                 onChanged: (value) {
@@ -260,7 +261,8 @@ class _DelegatesState extends State<Delegates> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'Name',
@@ -271,7 +273,8 @@ class _DelegatesState extends State<Delegates> {
                                             Expanded(
                                               child: Text(
                                                   '${delegatesList[index]['name']}',
-                                                  style: TextStyle(fontSize: 14),
+                                                  style:
+                                                      TextStyle(fontSize: 14),
                                                   textAlign: TextAlign.end),
                                             ),
                                           ],
@@ -305,7 +308,8 @@ class _DelegatesState extends State<Delegates> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'Email',
@@ -330,7 +334,8 @@ class _DelegatesState extends State<Delegates> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'Designation',
@@ -355,7 +360,8 @@ class _DelegatesState extends State<Delegates> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'Organization',
@@ -366,6 +372,58 @@ class _DelegatesState extends State<Delegates> {
                                             Expanded(
                                               child: Text(
                                                   '${delegatesList[index]['organization']}',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Known Source',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['known_source']}',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Registered on',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['created_at']}',
                                                   style:
                                                       TextStyle(fontSize: 14),
                                                   textAlign: TextAlign.end),

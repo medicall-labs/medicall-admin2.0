@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:admin_medicall/Screens/bottom_nav_bar.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:provider/provider.dart';
 import '../Providers/local_data.dart';
 import '../Sevices/api_services.dart';
@@ -24,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    checkForUpdate();
     _loadEventDetails();
   }
 
@@ -42,6 +45,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
     }
     _startNavigationTimer(currentEvent);
+  }
+
+  Future<void> checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      setState(() {
+        if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+          update();
+        }
+      });
+    }).catchError((e) {
+      print(e.toString());
+    });
+  }
+
+  void update() async {
+    print('Updating');
+    try {
+      await InAppUpdate.performImmediateUpdate();
+    } catch (e) {
+      SystemNavigator.pop();
+    }
   }
 
   void _startNavigationTimer(var currentEvent) {

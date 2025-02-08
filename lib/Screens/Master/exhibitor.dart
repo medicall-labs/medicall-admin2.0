@@ -413,6 +413,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                             childrenPadding:
                                 const EdgeInsets.only(left: 14),
                             children: [
+                              if(widget.isMasters != true)
                               Row(
                                 children: [
                                   Column(
@@ -753,10 +754,12 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                                           fontSize: 14,
                                           color: AppColor.grey),
                                     ),
-                                    Text(
-                                        '${exhibitorList[index]['products']}',
-                                        style: TextStyle(fontSize: 14),
-                                        textAlign: TextAlign.end),
+                                    Expanded(
+                                      child: Text(
+                                          '${exhibitorList[index]['products']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
+                                    ),
                                   ],
                                 ),
                               ),

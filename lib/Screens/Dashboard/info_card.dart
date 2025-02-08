@@ -34,6 +34,9 @@ class InfoCard extends StatelessWidget {
         } else if (title == 'Visitors' &&
             storedData['data']['permissions']['can_view_visitor'] == true) {
           targetPage = VisitorMaster();
+        } else if (title == '10t Visitors' &&
+            storedData['data']['permissions']['can_view_visitor'] == true) {
+          targetPage = VisitorMaster(isMasters: false,is10tVisitors: true);
         } else if (title == 'Delegates' &&
             storedData['data']['permissions']['can_view_delegate'] == true) {
           targetPage = Delegates();
@@ -45,7 +48,7 @@ class InfoCard extends StatelessWidget {
         }
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.3,
+        width: MediaQuery.of(context).size.width * 0.25,
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [

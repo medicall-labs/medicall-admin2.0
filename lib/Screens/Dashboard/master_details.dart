@@ -42,7 +42,6 @@ class _MasterDetailsState extends State<MasterDetails>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.width,
       width: MediaQuery.of(context).size.width,
       child: FadeTransition(
         opacity: _animation,
@@ -60,7 +59,14 @@ class _MasterDetailsState extends State<MasterDetails>
               "Visitors",
               Icons.people,
               Colors.green,
-              VisitorMaster(isMasters: true),
+              VisitorMaster(is10tVisitors: false,isMasters: true),
+              storedData['data']['permissions']['can_view_visitor'],
+            ),
+            _buildCard(
+              "10t Visitors",
+              Icons.people_outline,
+              Colors.purple,
+              VisitorMaster(is10tVisitors: true,isMasters: true),
               storedData['data']['permissions']['can_view_visitor'],
             ),
           ],

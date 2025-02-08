@@ -121,25 +121,33 @@ class _InsightsState extends State<Insights> {
                             color: Colors.white,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            InfoCard(
-                              title: 'Exhibitors',
-                              icon: Icons.business,
-                              count: data['exhibitors_count'] ?? 0,
-                            ),
-                            InfoCard(
-                              title: 'Visitors',
-                              icon: Icons.people,
-                              count: data['visitors_count'] ?? 0,
-                            ),
-                            InfoCard(
-                              title: 'Delegates',
-                              icon: Icons.person,
-                              count: data['delegateCount'] ?? 0,
-                            ),
-                          ],
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              InfoCard(
+                                title: 'Exhibitors',
+                                icon: Icons.business,
+                                count: data['exhibitors_count'] ?? 0,
+                              ),
+                              InfoCard(
+                                title: 'Visitors',
+                                icon: Icons.people,
+                                count: data['visitors_count'] ?? 0,
+                              ),
+                              InfoCard(
+                                title: '10t Visitors',
+                                icon: Icons.event_note_rounded,
+                                count: data['10tCount'] ?? 0,
+                              ),
+                              InfoCard(
+                                title: 'Delegates',
+                                icon: Icons.person,
+                                count: data['delegateCount'] ?? 0,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(

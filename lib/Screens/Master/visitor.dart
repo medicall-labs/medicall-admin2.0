@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 
 class VisitorMaster extends StatefulWidget {
   final bool? isMasters;
-  const VisitorMaster({super.key, this.isMasters});
+  final bool? is10tVisitors;
+  const VisitorMaster({super.key, this.isMasters, this.is10tVisitors});
 
   @override
   State<VisitorMaster> createState() => _VisitorMasterState();
@@ -72,9 +73,14 @@ class _VisitorMasterState extends State<VisitorMaster> {
     setState(() {
       isLoading = true;
     });
-    String query = widget.isMasters == true
+
+    String query = widget.isMasters == true && widget.is10tVisitors == false
         ? '$baseUrl/admin/visitors?cursor=$nextCursor'
-        : '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
+        : widget.isMasters == true && widget.is10tVisitors == true
+            ? '$baseUrl/admin/visitors?cursor=$nextCursor&registration_type=10t'
+            : widget.isMasters == false && widget.is10tVisitors == true
+                ? '$baseUrl/admin/visitors?event_id=$eventId&registration_type=10t&cursor=$nextCursor'
+                : '$baseUrl/admin/visitors?event_id=$eventId&cursor=$nextCursor';
 
     if (searchController.text.isNotEmpty) {
       query += '&search=${searchController.text}';
@@ -218,21 +224,22 @@ class _VisitorMasterState extends State<VisitorMaster> {
                   ),
                 ],
               ),
-              DropdownButtonFormField<String>(
-                value: selectedType,
-                decoration: InputDecoration(labelText: 'Type'),
-                items: ['web', 'medicall', 'online', '10t', 'whatsapp']
-                    .map((type) => DropdownMenuItem(
-                          value: type,
-                          child: Text(type),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedType = value;
-                  });
-                },
-              ),
+              if (widget.is10tVisitors != true)
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  decoration: InputDecoration(labelText: 'Type'),
+                  items: ['web', 'medicall', 'online', 'whatsapp']
+                      .map((type) => DropdownMenuItem(
+                            value: type,
+                            child: Text(type),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedType = value;
+                    });
+                  },
+                ),
               DropdownButtonFormField<String>(
                 value: participateStatus,
                 decoration: InputDecoration(labelText: 'Participate Status'),
@@ -329,7 +336,13 @@ class _VisitorMasterState extends State<VisitorMaster> {
           child: NavigationBack(),
         ),
         title: Text(
-          widget.isMasters == true ? 'Visitor Master' : 'Visitors List',
+          widget.isMasters == true && widget.is10tVisitors == true
+              ? '10t Visitor Master'
+              : widget.isMasters == true && widget.is10tVisitors == false
+                  ? 'Visitor Master'
+                  : widget.isMasters == false && widget.is10tVisitors == true
+                      ? '10t Visitors List'
+                      : 'Visitors List',
           style: AppTextStyles.header1,
         ),
         actions: [
@@ -397,7 +410,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Name',
@@ -420,7 +434,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Organization',
@@ -443,7 +458,8 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           'Designation',
@@ -556,9 +572,11 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text('${visitorList[index]['address']}',
-                                        style: TextStyle(fontSize: 14),
-                                        textAlign: TextAlign.end),
+                                    Expanded(
+                                      child: Text('${visitorList[index]['address']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -657,7 +675,7 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                 padding: EdgeInsets.only(right: 10),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Created at',
