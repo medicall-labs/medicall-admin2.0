@@ -572,9 +572,11 @@ class _VisitorMasterState extends State<VisitorMaster> {
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Text('${visitorList[index]['address']}',
-                                        style: TextStyle(fontSize: 14),
-                                        textAlign: TextAlign.end),
+                                    Expanded(
+                                      child: Text('${visitorList[index]['address']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
+                                    ),
                                   ],
                                 ),
                               ),
