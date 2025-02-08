@@ -311,152 +311,166 @@ class _ShowAppointmentState extends State<ShowAppointment> {
                           data: Theme.of(context)
                               .copyWith(dividerColor: AppColor.bgColor),
                           child: ExpansionTile(
-                            iconColor: AppColor.grey,
-                            textColor: AppColor.primary,
-                            title: Row(children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
+                            textColor: AppColor.secondary,
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Exhibitor name :',
+                                        'Exhibitor name',
                                         style: TextStyle(
                                             fontSize: 14, color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                      Expanded(
                                         child: Text(
-                                          '${appointmentList[index]['exhibitor_name']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${appointmentList[index]['exhibitor_name']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 5),
-                                  Row(
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Visitor name :',
+                                        'Visitor name',
                                         style: TextStyle(
                                             fontSize: 14, color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.4,
+                                      Expanded(
                                         child: Text(
-                                          '${appointmentList[index]['visitor_name']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${appointmentList[index]['visitor_name']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 5),
-                                  Row(
+                                ),
+                                SizedBox(height: 5),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Scheduled at :',
+                                        'Scheduled at',
                                         style: TextStyle(
                                             fontSize: 14, color: AppColor.grey),
                                       ),
-                                      Container(
-                                        width: MediaQuery.of(context).size.width *
-                                            0.5,
+                                      Expanded(
                                         child: Text(
-                                          '${appointmentList[index]['scheduled_at']}',
-                                          style: TextStyle(fontSize: 14),
-                                        ),
+                                            '${appointmentList[index]['scheduled_at']}',
+                                            style: TextStyle(fontSize: 14),
+                                            textAlign: TextAlign.end),
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ]),
+                                ),
+                              ],
+                            ),
+                            tilePadding: EdgeInsets.only(left: 14, right: 5),
+                            collapsedIconColor: AppColor.secondary,
                             childrenPadding: const EdgeInsets.only(left: 14),
                             children: [
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Designation :',
+                                      'Designation',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.6,
-                                      child: Text(
+                                    Text(
                                         '${appointmentList[index]['designation']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
+                                        textAlign: TextAlign.end),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Organization',
+                                      style: TextStyle(
+                                          fontSize: 14, color: AppColor.grey),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          '${appointmentList[index]['organization']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
                                     ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Organization :',
+                                      'Products',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                    Expanded(
                                       child: Text(
-                                        '${appointmentList[index]['organization']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
+                                          '${appointmentList[index]['products']}',
+                                          style: TextStyle(fontSize: 14),
+                                          textAlign: TextAlign.end),
                                     ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                padding: EdgeInsets.only(right: 10),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Products :',
+                                      'Updated at',
                                       style: TextStyle(
                                           fontSize: 14, color: AppColor.grey),
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
-                                      child: Text(
-                                        '${appointmentList[index]['products']}',
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
                                     Text(
-                                      'Updated at :',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.7,
-                                      child: Text(
                                         '${appointmentList[index]['updated_at']}',
                                         style: TextStyle(fontSize: 14),
-                                      ),
-                                    ),
+                                        textAlign: TextAlign.end),
                                   ],
                                 ),
                               ),
@@ -494,7 +508,7 @@ class _ShowAppointmentState extends State<ShowAppointment> {
                 : !isLoading
                     ? const Padding(
                         padding: EdgeInsets.all(16.0),
-                        child: Center(child: Text('No exhibitors found')),
+                        child: Center(child: Text('No appointments')),
                       )
                     : Container(),
             if (isLoading)
@@ -505,7 +519,7 @@ class _ShowAppointmentState extends State<ShowAppointment> {
             if (!hasMore && appointmentList.isNotEmpty)
               const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Center(child: Text('No more exhibitors')),
+                child: Center(child: Text('No more appointments')),
               ),
           ],
         ),

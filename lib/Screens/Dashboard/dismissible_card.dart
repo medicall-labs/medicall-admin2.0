@@ -71,7 +71,7 @@ class _DismissibleCardListState extends State<DismissibleCardList> {
                 style: AppTextStyles.text4.copyWith(
                   color: AppColor.primary,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 12,
                 ),
               ),
               Row(
@@ -97,7 +97,7 @@ class _DismissibleCardListState extends State<DismissibleCardList> {
                       ),
                       Text(
                         '${counts['visited_count']}',
-                        style: TextStyle(color: AppColor.primary, fontSize: 16),
+                        style: TextStyle(color: AppColor.primary, fontSize: 14),
                       ),
                     ],
                   );

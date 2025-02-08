@@ -203,7 +203,7 @@ class _DelegatesState extends State<Delegates> {
           child: NavigationBack(),
         ),
         title: Text(
-          'Delegates',
+          'Delegates List',
           style: AppTextStyles.header1,
         ),
       ),
@@ -246,130 +246,168 @@ class _DelegatesState extends State<Delegates> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.3,
-                                    child: Text(
-                                      'Name ',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
+                              Theme(
+                                data: ThemeData(
+                                  dividerColor: Colors.transparent,
+                                ),
+                                child: ExpansionTile(
+                                  textColor: AppColor.secondary,
+                                  title: Column(
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Name',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['name']}',
+                                                  style: TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Mobile number',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Text(
+                                                '${delegatesList[index]['mobile_number']}',
+                                                style: TextStyle(fontSize: 14),
+                                                textAlign: TextAlign.end),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Email',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['email']}',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Designation',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['designation']}',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Organization',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.grey),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                  '${delegatesList[index]['organization']}',
+                                                  style:
+                                                      TextStyle(fontSize: 14),
+                                                  textAlign: TextAlign.end),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Registered Seminars',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: AppColor.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              delegatesList[index]['seminars']
+                                                  .length
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: AppColor.secondary,
+                                                  fontWeight: FontWeight.bold),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.6,
-                                    child: Text(
-                                      '${delegatesList[index]['name']}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.3,
-                                    child: Text(
-                                      'Mobile number',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                    child: Text(
-                                      '${delegatesList[index]['mobile_number']}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.3,
-                                    child: Text(
-                                      'Email',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: Text(
-                                      '${delegatesList[index]['email']}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.3,
-                                    child: Text(
-                                      'Designation',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: Text(
-                                      '${delegatesList[index]['designation']}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.3,
-                                    child: Text(
-                                      'Organization',
-                                      style: TextStyle(
-                                          fontSize: 14, color: AppColor.grey),
-                                    ),
-                                  ),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.5,
-                                    child: Text(
-                                      '${delegatesList[index]['organization']}',
-                                      style: TextStyle(fontSize: 14),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 3),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Seminars :',
-                                    style: TextStyle(
-                                        fontSize: 14, color: AppColor.grey),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: ListView.builder(
+                                  tilePadding:
+                                      EdgeInsets.only(left: 5, right: 5),
+                                  collapsedIconColor: AppColor.secondary,
+                                  children: [
+                                    ListView.builder(
                                       shrinkWrap: true,
-                                      physics:
-                                          NeverScrollableScrollPhysics(), // Prevent nested scrolling
+                                      physics: NeverScrollableScrollPhysics(),
                                       itemCount: delegatesList[index]
                                               ['seminars']
                                           .length,
@@ -378,15 +416,79 @@ class _DelegatesState extends State<Delegates> {
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 2.0, horizontal: 5),
                                           child: Text(
-                                            '• ${delegatesList[index]['seminars'][seminarIndex]['seminar_name']}',
+                                            '${seminarIndex + 1} - ${delegatesList[index]['seminars'][seminarIndex]['seminar_name']}',
                                             style: AppTextStyles.label3,
                                           ),
                                         );
                                       },
-                                    ),
-                                  ),
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
+                              // Text(
+                              //   'Seminars',
+                              //   style: TextStyle(
+                              //     fontSize: 14,
+                              //     color: AppColor.grey,
+                              //   ),
+                              // ),
+                              // Container(
+                              //   width: MediaQuery.of(context).size.width,
+                              //   padding: EdgeInsets.only(right: 10),
+                              //   child: Expanded(
+                              //     child: ListView.builder(
+                              //       shrinkWrap: true,
+                              //       physics: NeverScrollableScrollPhysics(),
+                              //       itemCount:
+                              //           delegatesList[index]['seminars'].length,
+                              //       itemBuilder: (context, seminarIndex) {
+                              //         return Padding(
+                              //           padding: const EdgeInsets.symmetric(
+                              //               vertical: 2.0, horizontal: 5),
+                              //           child: Text(
+                              //             '${seminarIndex + 1}  - ${delegatesList[index]['seminars'][seminarIndex]['seminar_name']}',
+                              //             style: AppTextStyles.label3,
+                              //           ),
+                              //         );
+                              //       },
+                              //     ),
+                              //   ),
+                              // ),
+                              //
+                              //
+                              // Container(
+                              //   width: MediaQuery.of(context).size.width,
+                              //   padding: EdgeInsets.only(right: 10),
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              //     spacing: 20,
+                              //     children: [
+                              //       Text(
+                              //         'Seminars',
+                              //         style: TextStyle(
+                              //           fontSize: 14,
+                              //           color: AppColor.grey,
+                              //         ),
+                              //       ),
+                              //       Expanded(
+                              //         child: ListView.builder(
+                              //           shrinkWrap: true,
+                              //           physics: NeverScrollableScrollPhysics(),
+                              //           itemCount: delegatesList[index]['seminars'].length,
+                              //           itemBuilder: (context, seminarIndex) {
+                              //             return Padding(
+                              //               padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5),
+                              //               child: Text(
+                              //                 '• ${delegatesList[index]['seminars'][seminarIndex]['seminar_name']}',
+                              //                 style: AppTextStyles.label3,
+                              //               ),
+                              //             );
+                              //           },
+                              //         ),
+                              //       )
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

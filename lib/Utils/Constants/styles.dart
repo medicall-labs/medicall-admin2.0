@@ -6,7 +6,7 @@ import 'app_color.dart';
 
 class AppTextStyles {
   static final TextStyle header = GoogleFonts.lato(
-      fontWeight: FontWeight.bold, fontSize: 20.sp, color: AppColor.black);
+      fontWeight: FontWeight.bold, fontSize: 22.sp, color: AppColor.black);
   static final TextStyle header1 = GoogleFonts.lato(
       fontWeight: FontWeight.bold, fontSize: 20.sp, color: Colors.white);
 

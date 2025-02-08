@@ -1,4 +1,6 @@
+import 'package:admin_medicall/Utils/Constants/spacing.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../Master/exhibitor.dart';
 import '../Master/visitor.dart';
@@ -10,9 +12,12 @@ class MasterDetails extends StatefulWidget {
   _MasterDetailsState createState() => _MasterDetailsState();
 }
 
-class _MasterDetailsState extends State<MasterDetails> with SingleTickerProviderStateMixin {
+class _MasterDetailsState extends State<MasterDetails>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  var storedData = GetStorage().read("local_store");
 
   @override
   void initState() {
@@ -44,25 +49,57 @@ class _MasterDetailsState extends State<MasterDetails> with SingleTickerProvider
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildCard("Exhibitors", Icons.business, Colors.blue, ExhibitorMaster(isMasters: true,)),
-            _buildCard("Visitors", Icons.people, Colors.green, VisitorMaster(isMasters: true,)),
+            _buildCard(
+              "Exhibitors",
+              Icons.business,
+              Colors.blue,
+              ExhibitorMaster(isMasters: true),
+              storedData['data']['permissions']['can_view_exhibitor'],
+            ),
+            _buildCard(
+              "Visitors",
+              Icons.people,
+              Colors.green,
+              VisitorMaster(isMasters: true),
+              storedData['data']['permissions']['can_view_visitor'],
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCard(String title, IconData icon, Color color, Widget page) {
+  Widget _buildCard(String title, IconData icon, Color color, Widget page,
+      bool hasPermission) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
-      },
+      onTap: hasPermission
+          ? () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            }
+          : () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("Access Denied"),
+                  content:
+                      Text("You do not have permission to view $title master."),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                ),
+              );
+            },
       child: Card(
         elevation: 5,
-        color: color,
+        color: hasPermission ? color : Colors.grey,
         child: SizedBox(
           width: 300,
           height: 150,
@@ -74,7 +111,7 @@ class _MasterDetailsState extends State<MasterDetails> with SingleTickerProvider
                 size: 50,
                 color: Colors.white,
               ),
-              const SizedBox(width: 10), // Space between icon and text
+              AppSpaces.horizontalSpace10,
               Text(
                 title,
                 style: TextStyle(
@@ -89,4 +126,3 @@ class _MasterDetailsState extends State<MasterDetails> with SingleTickerProvider
     );
   }
 }
-
