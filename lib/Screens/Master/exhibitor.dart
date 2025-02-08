@@ -413,6 +413,7 @@ class _ExhibitorMasterState extends State<ExhibitorMaster> {
                             childrenPadding:
                                 const EdgeInsets.only(left: 14),
                             children: [
+                              if(widget.isMasters != true)
                               Row(
                                 children: [
                                   Column(
