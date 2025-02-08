@@ -143,11 +143,12 @@ class _DelegatesState extends State<Delegates> {
               DropdownButtonFormField<String>(
                 value: selectedSeminarId,
                 decoration: InputDecoration(labelText: 'Select Seminar'),
+                isExpanded: true,
                 items: seminarList.map<DropdownMenuItem<String>>((seminar) {
                   return DropdownMenuItem<String>(
-                    value: seminar['id'].toString(), // Use seminar ID as value
+                    value: seminar['id'].toString(),
                     child: Text(
-                        seminar['title']), // Show seminar title in dropdown
+                        seminar['title']),
                   );
                 }).toList(),
                 onChanged: (value) {
@@ -415,7 +416,7 @@ class _DelegatesState extends State<Delegates> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              'Created at',
+                                              'Registered on',
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   color: AppColor.grey),
