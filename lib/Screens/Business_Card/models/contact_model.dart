@@ -9,6 +9,7 @@ const String tblContactColDesignation = 'designation';
 const String tblContactColWebsite = 'website';
 const String tblContactColImage = 'image';
 const String tblContactColFavorite = 'favorite';
+const String tblContactBusinessType = 'business_type';
 
 class ContactModel {
   int id;
@@ -20,6 +21,7 @@ class ContactModel {
   String designation;
   String website;
   String image;
+  String business_type;
   bool favorite;
 
   ContactModel({
@@ -32,6 +34,7 @@ class ContactModel {
     this.designation = '',
     this.website = '',
     this.image = '',
+    this.business_type = '',
     this.favorite = false,
   });
 
@@ -45,6 +48,7 @@ class ContactModel {
       tblContactColDesignation: designation,
       tblContactColWebsite: website,
       tblContactColImage: image,
+      tblContactBusinessType: business_type,
       tblContactColFavorite: favorite ? 1 : 0,
     };
     if (id > 0) {
@@ -62,11 +66,12 @@ class ContactModel {
         designation: map[tblContactColDesignation],
         website: map[tblContactColWebsite],
         image: map[tblContactColImage],
-        favorite: map[tblContactColFavorite] == 1? true : false,
+        business_type: map[tblContactBusinessType],
+        favorite: map[tblContactColFavorite] == 1 ? true : false,
       );
 
   @override
   String toString() {
-    return 'ContactModel{id: $id, name: $name, mobile: $mobile, email: $email, address: $address, company: $company, designation: $designation, website: $website, image: $image, favorite: $favorite}';
+    return 'ContactModel{id: $id, name: $name, mobile: $mobile, email: $email, address: $address, company: $company, designation: $designation, website: $website, image: $image, business_type: $business_type , favorite: $favorite}';
   }
 }

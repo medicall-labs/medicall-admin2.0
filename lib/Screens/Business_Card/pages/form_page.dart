@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:admin_medicall/Screens/Dashboard/home_page.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import '../../../Sevices/api_services.dart';
 import '../../../Utils/Constants/app_color.dart';
 import '../../../Utils/Constants/styles.dart';
 import '../../../Utils/Widgets/back_button.dart';
+import '../../bottom_nav_bar.dart';
 import '../models/contact_model.dart';
 import '../pages/business_card.dart';
 import '../providers/contact_provider.dart';
@@ -32,6 +35,7 @@ class _FormPageState extends State<FormPage> {
   final companyController = TextEditingController();
   final designationController = TextEditingController();
   final websiteController = TextEditingController();
+  final business_typeController = TextEditingController();
 
   @override
   void initState() {
@@ -42,6 +46,7 @@ class _FormPageState extends State<FormPage> {
     companyController.text = widget.contactModel.company;
     designationController.text = widget.contactModel.designation;
     websiteController.text = widget.contactModel.website;
+    business_typeController.text = widget.contactModel.business_type;
 
     super.initState();
   }
@@ -129,20 +134,27 @@ class _FormPageState extends State<FormPage> {
                 return null;
               },
             ),
+            TextFormField(
+              controller: business_typeController,
+              decoration: const InputDecoration(labelText: 'Business Type'),
+              validator: (value) {
+                return null;
+              },
+            ),
           ],
         ),
       ),
       floatingActionButton: SizedBox(
-        width: 150,
         child: ElevatedButton(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all<Color>(AppColor.secondary),
           ),
           onPressed: saveContact,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Show history',
+                'Submit Card',
                 style: AppTextStyles.text4.copyWith(
                   color: AppColor.white,
                   fontWeight: FontWeight.bold,
@@ -184,55 +196,102 @@ class _FormPageState extends State<FormPage> {
       widget.contactModel.company = companyController.text;
       widget.contactModel.designation = designationController.text;
       widget.contactModel.website = websiteController.text;
+      widget.contactModel.business_type = business_typeController.text;
 
-      Provider.of<ContactProvider>(context, listen: false)
-          .insertContact(widget.contactModel)
-          .then((value) async {
-        if (value > 0) {
-          _submitForm();
-          // ScaffoldMessenger.of(context)
-          //     .showSnackBar(SnackBar(backgroundColor: Colors.green,content: Text('Saved to Google Sheet!')));
-          Get.to(HomePage());
-        }
-      }).catchError((onError) {
-        // ScaffoldMessenger.of(context)
-        //     .showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Failed to save!')));
-      });
+      print('5400==========>>>>>>>>>>>>>'
+          '\n ${widget.contactModel.name} \n'
+          '\n ${widget.contactModel.mobile} \n'
+          '\n ${widget.contactModel.email} \n'
+          '\n ${widget.contactModel.address} \n'
+          '\n ${widget.contactModel.designation} \n'
+          '\n ${widget.contactModel.website} \n'
+          '\n ${widget.contactModel.business_type} \n');
+
+      _submitForm();
     }
   }
 
   void _submitForm() async {
-    if (_formKey.currentState!.validate()) {
-      const String scriptURL =
-          'https://script.google.com/macros/s/AKfycbxl-e9MSzJFkAZt726Z3gzQBTB7o5GSDdhVLox-03YJxcXD8DAVI-EB85txLCCd0-_v/exec';
 
-      // Collect data from the controllers
-      Map<String, String> data = {
-        'name': nameController.text,
-        'mobile': mobileController.text,
-        'email': emailController.text,
-        'address': addressController.text,
-        'company': companyController.text,
-        'designation': designationController.text,
-        'website': websiteController.text,
-      };
+    String imageUrl = '';
+    _showLoadingDialog(context);
 
-      try {
-        var response = await http.post(
-          Uri.parse(scriptURL),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: jsonEncode(data),
-        );
+      imageUrl = await _uploadImageToFirebase(File(widget.contactModel.image));
+
+    Map<String, String> data = {
+      'name': nameController.text,
+      'mobile': mobileController.text,
+      'email': emailController.text,
+      'address': addressController.text,
+      'company': companyController.text,
+      'designation': designationController.text,
+      'website': websiteController.text,
+      'type': business_typeController.text,
+      'image_path': imageUrl
+    };
+
+    try {
+      var response = await RemoteService().postDataToApi(
+          'https://crm.medicall.in/api/admin/business-card/store', data);
+      var result = jsonDecode(response.body);
+      if (result['status'] == 'success') {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(backgroundColor: Colors.green,content: Text('Saved to Google Sheet!')));
-
-      } catch (error) {
-        print("Error: $error");
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(backgroundColor: Colors.red,content: Text('Failed to save!')));
+          const SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Business card information stored successfully!')),
+        );
+        Get.offAll(() => BottomNavBar());
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text('Error sending Business card details. \n Please try again')),
+        );
+        Get.offAll(() => BottomNavBar());
       }
+    } catch (err) {
+      print("$err");
     }
   }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent closing by tapping outside
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false, // Disable back button press
+          child: Dialog(
+            backgroundColor:
+            Colors.transparent, // Make the background transparent
+            elevation: 0,
+            child: Center(
+              child: CircularProgressIndicator(), // Show a loading spinner
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // Function to upload image to Firebase Storage and return the URL
+  Future<String> _uploadImageToFirebase(File image) async {
+    try {
+      // Create a unique file name
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      // Reference to the Firebase Storage
+      Reference ref =
+      FirebaseStorage.instance.ref().child('/business_card/$fileName');
+
+      // Uploading the file
+      await ref.putFile(image);
+      // Getting the download URL
+      String downloadUrl = await ref.getDownloadURL();
+      return downloadUrl; // Return the URL
+    } catch (e) {
+      print('Error uploading image: $e');
+      return ''; // Return an empty string or handle the error appropriately
+    }
+  }
+
 }

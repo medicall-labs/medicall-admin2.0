@@ -34,21 +34,53 @@ class _ScanPageState extends State<ScanPage> {
       company = '',
       designation = '',
       website = '',
-      image = '';
+      image = '',
+      business_type = '';
 
   void createContact() {
     final contact = ContactModel(
-        name: name,
-        mobile: mobile,
-        email: email,
-        address: address,
-        company: company,
-        designation: designation,
-        website: website,
-        image: image);
+      name: name,
+      mobile: mobile,
+      email: email,
+      address: address,
+      company: company,
+      designation: designation,
+      website: website,
+      image: image,
+      business_type: selectedType,
+    );
     Get.to(FormPage(
       contactModel: contact,
     ));
+  }
+
+  String selectedType = "Select User Type";
+
+  void _showTypeSelectionDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(selectedType),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: ["Delegates", "Exhibitor", "Visitor"]
+                .map(
+                  (type) => ListTile(
+                    title: Text(type),
+                    onTap: () {
+                      setState(() {
+                        selectedType = type;
+                      });
+                      Navigator.pop(context);
+                    },
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -133,6 +165,40 @@ class _ScanPageState extends State<ScanPage> {
                     DragTargetItem(
                       property: "Website",
                       onDrop: getPropertyValue,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text('Business Type'),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: GestureDetector(
+                            onTap: _showTypeSelectionDialog,
+                            child: IntrinsicWidth(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 6),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      selectedType,
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    Icon(Icons.arrow_drop_down),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
